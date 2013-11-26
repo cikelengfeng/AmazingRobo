@@ -7,11 +7,13 @@
 //
 
 #import "DXDocument.h"
+#import "DXTouchCommand.h"
 
 @interface DXDocument ()
 
 
-- (IBAction)buttonTapped:(NSButton *)sender;
+- (IBAction)tapButtonTapped:(NSButton *)sender;
+- (IBAction)panButtonTapped:(NSButton *)sender;
 
 @property (strong,nonatomic) QServer *server;
 @property (strong,nonatomic) NSInputStream *input;
@@ -43,6 +45,7 @@
     [super windowControllerDidLoadNib:aController];
     // Add any code here that needs to be executed once the windowController has loaded the document's window.
     if (!self.server.isStarted) {
+        self.server.delegate = self;
         [self.server start];
     }
 }
@@ -71,17 +74,67 @@
     return YES;
 }
 
-- (IBAction)buttonTapped:(NSButton *)sender {
+- (IBAction)tapButtonTapped:(NSButton *)sender {
     static BOOL flag = YES;
     NSError *err = nil;
+    static DXTouchCommand *testCommand1,*testCommand2;
+    testCommand1 = [[DXTouchCommand alloc]initWithType:CommandTap beganPoints:@[touchPointMake(30, 30)] endedPoints:@[touchPointMake(30, 30)] duration:0.3];
+    testCommand2 = [[DXTouchCommand alloc]initWithType:CommandTap beganPoints:@[touchPointMake(290, 30)] endedPoints:@[touchPointMake(290, 30)] duration:0.3];
     if (flag) {
-        [self sendString:@"{\"beganPoints\":[{\"x\":30,\"y\":30}],\"endedPoints\":[{\"x\":30,\"y\":30}],\"type\":0,\"duration\":0.3}" error:&err];//tap at (30,30)
+        [self sendTouchCommand:testCommand1 error:&err];//tap at (30,30)
     }else {
-        [self sendString:@"{\"beganPoints\":[{\"x\":290,\"y\":30}],\"endedPoints\":[{\"x\":290,\"y\":30}],\"type\":0,\"duration\":0.3}" error:&err];//tap at (290,30)
+        [self sendTouchCommand:testCommand2 error:&err];//tap at (290,30)
     }
     flag = !flag;
     if (err) {
         NSLog(@"error occured : %@",err);
+    }
+}
+
+- (IBAction)panButtonTapped:(id)sender {
+    static BOOL flag = YES;
+    NSError *err = nil;
+    static DXTouchCommand *testCommand1,*testCommand2;
+    testCommand1 = [[DXTouchCommand alloc]initWithType:CommandPan beganPoints:@[touchPointMake(30, 30)] endedPoints:@[touchPointMake(290, 30)] duration:0.3];
+    testCommand2 = [[DXTouchCommand alloc]initWithType:CommandPan beganPoints:@[touchPointMake(290, 30)] endedPoints:@[touchPointMake(30, 30)] duration:0.3];
+    if (flag) {
+        [self sendTouchCommand:testCommand1 error:&err];//pan from (30,30) to (290,30)
+    }else {
+        [self sendTouchCommand:testCommand2 error:&err];//pan from (290,30) to (30,30)
+    }
+    flag = !flag;
+    if (err) {
+        NSLog(@"error occured : %@",err);
+    }
+}
+
+- (void)openStreams
+{
+    assert(self.input != nil);            // streams must exist but aren't open
+    assert(self.output != nil);
+    
+    [self.input  setDelegate:self];
+    [self.input  scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    [self.input  open];
+    
+    [self.output setDelegate:self];
+    [self.output scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    [self.output open];
+}
+
+- (void)closeStreams
+{
+    assert( (self.input != nil) == (self.output != nil) );      // should either have both or neither
+    if (self.input != nil) {
+        [self.server closeOneConnection:self];
+        
+        [self.input removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+        [self.input close];
+        self.input = nil;
+        
+        [self.output removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+        [self.output close];
+        self.output = nil;
     }
 }
 
@@ -105,12 +158,7 @@
         
         self.input = inputStream;
         self.output = outputStream;
-        inputStream.delegate = self;
-        outputStream.delegate = self;
-        [inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-        [outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-        [inputStream open];
-        [outputStream open];
+        [self openStreams];
         
         result = self;
     }
@@ -120,11 +168,7 @@
 
 - (void)server:(QServer *)server closeConnection:(id)connection
 {
-    [self.input removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-    [self.input close];
-    [self.output removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-    [self.output close];
-    [self.server closeOneConnection:self];
+    [self closeStreams];
 }
 
 #pragma mark - NSStream delegate
@@ -145,6 +189,7 @@
             break;
         case NSStreamEventEndEncountered:
             NSLog(@"NSStreamEventEndEncountered");
+            [self closeStreams];
             break;
         case NSStreamEventErrorOccurred:
             NSLog(@"NSStreamEventErrorOccurred : %@",aStream.streamError);
@@ -160,17 +205,25 @@
     }
 }
 
-#pragma mark - send string 
+#pragma mark - send data
 - (void)sendString:(NSString *)data error:(NSError *__autoreleasing *)err
 {
     NSLog(@"sending data : %@",data);
-    int const bufferSize = 1024;
     NSInteger result;
     uint8_t *buffer = (uint8_t *)data.UTF8String;
-    result = [self.output write:buffer maxLength:bufferSize];
+    result = [self.output write:buffer maxLength:data.length];
     if (result == -1) {
         *err = self.output.streamError;
         return;
+    }
+}
+
+- (void)sendTouchCommand:(DXTouchCommand *)command error:(NSError *__autoreleasing *)err
+{
+    if (command) {
+        [self sendString:[command toJSONString] error:err];
+    }else {
+        NSLog(@"command is nil");
     }
 }
 
