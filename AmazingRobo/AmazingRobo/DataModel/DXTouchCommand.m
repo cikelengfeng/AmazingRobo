@@ -7,7 +7,6 @@
 //
 
 #import "DXTouchCommand.h"
-#import "JSONKit.h"
 
 @interface DXTouchCommand ()
 

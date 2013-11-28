@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		425176281844816300C3D08D /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 425176251844816300C3D08D /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		42517630184481E000C3D08D /* DXTouchCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 4251762F184481E000C3D08D /* DXTouchCommand.m */; };
+		4271FA36184739F800EF87D0 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 4271FA35184739F800EF87D0 /* Base64.m */; };
 		42B0272A1843593A00ED40B4 /* DXTCPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 42B027271843593A00ED40B4 /* DXTCPServer.m */; };
 		42B0272B1843593A00ED40B4 /* QServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 42B027291843593A00ED40B4 /* QServer.m */; };
 		42C0FDF3183B4A2F004094FD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42C0FDF2183B4A2F004094FD /* Cocoa.framework */; };
@@ -40,6 +41,8 @@
 		425176251844816300C3D08D /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		4251762E184481E000C3D08D /* DXTouchCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXTouchCommand.h; sourceTree = "<group>"; };
 		4251762F184481E000C3D08D /* DXTouchCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXTouchCommand.m; sourceTree = "<group>"; };
+		4271FA34184739F800EF87D0 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
+		4271FA35184739F800EF87D0 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
 		42B027261843593A00ED40B4 /* DXTCPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXTCPServer.h; sourceTree = "<group>"; };
 		42B027271843593A00ED40B4 /* DXTCPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXTCPServer.m; sourceTree = "<group>"; };
 		42B027281843593A00ED40B4 /* QServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QServer.h; sourceTree = "<group>"; };
@@ -105,6 +108,16 @@
 			path = DataModel;
 			sourceTree = "<group>";
 		};
+		4271FA33184739F800EF87D0 /* Base64 */ = {
+			isa = PBXGroup;
+			children = (
+				4271FA34184739F800EF87D0 /* Base64.h */,
+				4271FA35184739F800EF87D0 /* Base64.m */,
+			);
+			name = Base64;
+			path = ../../Base64/Base64;
+			sourceTree = "<group>";
+		};
 		42B027251843593A00ED40B4 /* TCPServer */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,6 +171,7 @@
 		42C0FDF8183B4A2F004094FD /* AmazingRobo */ = {
 			isa = PBXGroup;
 			children = (
+				4271FA33184739F800EF87D0 /* Base64 */,
 				4251762D184481E000C3D08D /* DataModel */,
 				425176221844816300C3D08D /* JSONKit */,
 				42B027251843593A00ED40B4 /* TCPServer */,
@@ -301,6 +315,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4271FA36184739F800EF87D0 /* Base64.m in Sources */,
 				42B0272B1843593A00ED40B4 /* QServer.m in Sources */,
 				42C0FE06183B4A2F004094FD /* DXDocument.m in Sources */,
 				42C0FDFF183B4A2F004094FD /* main.m in Sources */,

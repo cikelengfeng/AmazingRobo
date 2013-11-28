@@ -8,6 +8,11 @@
 
 #import "DXDocument.h"
 #import "DXTouchCommand.h"
+#import "Base64.h"
+
+#define kObserverKeypathInput @"input.streamStatus"
+#define kObserverKeypathoutput @"output.streamStatus"
+
 
 @interface DXDocument ()
 
@@ -18,6 +23,9 @@
 @property (strong,nonatomic) QServer *server;
 @property (strong,nonatomic) NSInputStream *input;
 @property (strong,nonatomic) NSOutputStream *output;
+@property (strong,nonatomic) NSMutableData *dataFromTCP;
+
+@property (weak) IBOutlet NSImageView *screenShot;
 
 @end
 
@@ -78,7 +86,7 @@
     static BOOL flag = YES;
     NSError *err = nil;
     static DXTouchCommand *testCommand1,*testCommand2;
-    testCommand1 = [[DXTouchCommand alloc]initWithType:CommandTap beganPoints:@[touchPointMake(30, 30)] endedPoints:@[touchPointMake(30, 30)] duration:0.3];
+    testCommand1 = [[DXTouchCommand alloc]initWithType:CommandTap beganPoints:@[touchPointMake(40, 86)] endedPoints:@[touchPointMake(30, 30)] duration:0.3];
     testCommand2 = [[DXTouchCommand alloc]initWithType:CommandTap beganPoints:@[touchPointMake(290, 30)] endedPoints:@[touchPointMake(290, 30)] duration:0.3];
     if (flag) {
         [self sendTouchCommand:testCommand1 error:&err];//tap at (30,30)
@@ -120,6 +128,9 @@
     [self.output setDelegate:self];
     [self.output scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
     [self.output open];
+    
+    [self addObserver:self forKeyPath:kObserverKeypathInput options:NSKeyValueObservingOptionNew context:NULL];
+    [self addObserver:self forKeyPath:kObserverKeypathoutput options:NSKeyValueObservingOptionNew context:NULL];
 }
 
 - (void)closeStreams
@@ -127,6 +138,9 @@
     assert( (self.input != nil) == (self.output != nil) );      // should either have both or neither
     if (self.input != nil) {
         [self.server closeOneConnection:self];
+        
+        [self removeObserver:self forKeyPath:kObserverKeypathInput];
+        [self removeObserver:self forKeyPath:kObserverKeypathoutput];
         
         [self.input removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
         [self.input close];
@@ -136,6 +150,27 @@
         [self.output close];
         self.output = nil;
     }
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if (object == self.input && [keyPath isEqualToString:kObserverKeypathInput]) {
+        NSStreamStatus new = [change[NSKeyValueChangeNewKey] integerValue];
+        NSStreamStatus old = [change[NSKeyValueChangeOldKey] integerValue];
+        if (new == NSStreamStatusReading && old == NSStreamStatusOpen) {
+            [self.dataFromTCP resetBytesInRange:NSMakeRange(0, self.dataFromTCP.length)];
+        }
+    }else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
+}
+
+- (NSMutableData *)dataFromTCP
+{
+    if (!_dataFromTCP) {
+        _dataFromTCP = [NSMutableData data];
+    }
+    return _dataFromTCP;
 }
 
 #pragma mark - QServer delegate
@@ -175,16 +210,37 @@
 
 - (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode
 {
-    int const bufferSize = 256;
-    uint8_t buffer[bufferSize] = {0};
+    int const bufferSize = 2<<14;
+    static uint8_t buffer[bufferSize] = {0};
     NSInteger readed = 0;
+    static BOOL completeFlag;
+    NSMutableDictionary *json;
+    if (completeFlag) {
+        [self.dataFromTCP setLength:0];
+        completeFlag = NO;
+    }
     switch (eventCode) {
         case NSStreamEventHasBytesAvailable:
             memset(buffer, 0, sizeof(buffer));
             readed = [self.input read:buffer maxLength:bufferSize];
-            if (readed > 0) {
-                NSString *coming = [NSString stringWithUTF8String:(char *)buffer];
-                NSLog(@"coming data : %@",coming);
+            NSUInteger appendLength = readed;
+             if (readed > 0) {
+                 for (int i = 0; i < readed; i++) {
+                     if (buffer[i] == 0xed) {
+                         completeFlag = YES;
+                         appendLength = i;
+                         break;
+                     }
+                 }
+                 [self.dataFromTCP appendBytes:buffer length:appendLength];
+             }
+//            NSLog(@"readed : %ld",readed);
+            if (completeFlag) {
+//                NSLog(@"data length : %ld",self.dataFromTCP.length);
+                json = [self.dataFromTCP mutableObjectFromJSONData];
+//                NSLog(@"readed json : %@",json);
+                NSImage *image = [self imageWithJSON:json];
+                [self.screenShot setImage:image];
             }
             break;
         case NSStreamEventEndEncountered:
@@ -208,7 +264,7 @@
 #pragma mark - send data
 - (void)sendString:(NSString *)data error:(NSError *__autoreleasing *)err
 {
-    NSLog(@"sending data : %@",data);
+    NSLog(@"sending string : %@",data);
     NSInteger result;
     uint8_t *buffer = (uint8_t *)data.UTF8String;
     result = [self.output write:buffer maxLength:data.length];
@@ -225,6 +281,15 @@
     }else {
         NSLog(@"command is nil");
     }
+}
+
+#pragma mark - image decode
+- (NSImage *)imageWithJSON:(NSDictionary *)json
+{
+    NSString *base64 = json[@"data"];
+    NSData *imageData = [NSData dataWithBase64EncodedString:base64];
+    NSImage *image = [[NSImage alloc]initWithData:imageData];
+    return image;
 }
 
 @end
