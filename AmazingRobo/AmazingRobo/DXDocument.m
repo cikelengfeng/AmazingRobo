@@ -86,7 +86,7 @@
     static BOOL flag = YES;
     NSError *err = nil;
     static DXTouchCommand *testCommand1,*testCommand2;
-    testCommand1 = [[DXTouchCommand alloc]initWithType:CommandTap beganPoints:@[touchPointMake(40, 86)] endedPoints:@[touchPointMake(30, 30)] duration:0.3];
+    testCommand1 = [[DXTouchCommand alloc]initWithType:CommandTap beganPoints:@[touchPointMake(30, 30)] endedPoints:@[touchPointMake(30, 30)] duration:0.3];
     testCommand2 = [[DXTouchCommand alloc]initWithType:CommandTap beganPoints:@[touchPointMake(290, 30)] endedPoints:@[touchPointMake(290, 30)] duration:0.3];
     if (flag) {
         [self sendTouchCommand:testCommand1 error:&err];//tap at (30,30)
