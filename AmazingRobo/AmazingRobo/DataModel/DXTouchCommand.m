@@ -17,6 +17,11 @@
 
 @end
 
+NSString * touchPointFromCGPoint(CGPoint p)
+{
+    return touchPointMake(p.x, p.y);
+}
+
 @implementation DXTouchCommand
 
 - (instancetype)initWithType:(CommandType)type beganPoints:(NSArray *)bps endedPoints:(NSArray *)eps duration:(NSTimeInterval)duration

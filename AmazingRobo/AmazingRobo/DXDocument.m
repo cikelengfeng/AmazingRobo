@@ -9,16 +9,18 @@
 #import "DXDocument.h"
 #import "DXTouchCommand.h"
 #import "Base64.h"
-
-#define kObserverKeypathInput @"input.streamStatus"
-#define kObserverKeypathoutput @"output.streamStatus"
-
+#import "DXFeatureFinder.h"
+#import "NSImageView+AddMask.h"
 
 @interface DXDocument ()
 
 
-- (IBAction)tapButtonTapped:(NSButton *)sender;
+- (IBAction)tapLeftTopButtonTapped:(NSButton *)sender;
 - (IBAction)panButtonTapped:(NSButton *)sender;
+- (IBAction)tapMenuTapped:(NSButton *)sender;
+- (IBAction)tapBuylistTapped:(id)sender;
+- (IBAction)tapHotDishesTapped:(id)sender;
+- (IBAction)tapRightTopButtonTapped:(id)sender;
 
 @property (strong,nonatomic) QServer *server;
 @property (strong,nonatomic) NSInputStream *input;
@@ -26,6 +28,7 @@
 @property (strong,nonatomic) NSMutableData *dataFromTCP;
 
 @property (weak) IBOutlet NSImageView *screenShot;
+@property (weak) IBOutlet NSImageView *resultView;
 
 @end
 
@@ -82,18 +85,11 @@
     return YES;
 }
 
-- (IBAction)tapButtonTapped:(NSButton *)sender {
-    static BOOL flag = YES;
+- (IBAction)tapLeftTopButtonTapped:(NSButton *)sender {
     NSError *err = nil;
-    static DXTouchCommand *testCommand1,*testCommand2;
-    testCommand1 = [[DXTouchCommand alloc]initWithType:CommandTap beganPoints:@[touchPointMake(30, 30)] endedPoints:@[touchPointMake(30, 30)] duration:0.3];
-    testCommand2 = [[DXTouchCommand alloc]initWithType:CommandTap beganPoints:@[touchPointMake(290, 30)] endedPoints:@[touchPointMake(290, 30)] duration:0.3];
-    if (flag) {
-        [self sendTouchCommand:testCommand1 error:&err];//tap at (30,30)
-    }else {
-        [self sendTouchCommand:testCommand2 error:&err];//tap at (290,30)
-    }
-    flag = !flag;
+    DXTouchCommand *testCommand;
+    testCommand = [[DXTouchCommand alloc]initWithType:CommandTap beganPoints:@[touchPointMake(30, 30)] endedPoints:@[touchPointMake(30, 30)] duration:0.3];
+    [self sendTouchCommand:testCommand error:&err];
     if (err) {
         NSLog(@"error occured : %@",err);
     }
@@ -116,6 +112,28 @@
     }
 }
 
+- (IBAction)tapMenuTapped:(id)sender {
+    [self tapFeature:@"menu"];
+}
+
+- (IBAction)tapBuylistTapped:(id)sender {
+    [self tapFeature:@"buylist"];
+}
+
+- (IBAction)tapHotDishesTapped:(id)sender {
+    [self tapFeature:@"hotdish"];
+}
+
+- (IBAction)tapRightTopButtonTapped:(id)sender {
+    NSError *err = nil;
+    DXTouchCommand *testCommand;
+    testCommand = [[DXTouchCommand alloc]initWithType:CommandTap beganPoints:@[touchPointMake(290, 30)] endedPoints:@[touchPointMake(290, 30)] duration:0.3];
+    [self sendTouchCommand:testCommand error:&err];
+    if (err) {
+        NSLog(@"error occured : %@",err);
+    }
+}
+
 - (void)openStreams
 {
     assert(self.input != nil);            // streams must exist but aren't open
@@ -129,8 +147,6 @@
     [self.output scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
     [self.output open];
     
-    [self addObserver:self forKeyPath:kObserverKeypathInput options:NSKeyValueObservingOptionNew context:NULL];
-    [self addObserver:self forKeyPath:kObserverKeypathoutput options:NSKeyValueObservingOptionNew context:NULL];
 }
 
 - (void)closeStreams
@@ -139,9 +155,6 @@
     if (self.input != nil) {
         [self.server closeOneConnection:self];
         
-        [self removeObserver:self forKeyPath:kObserverKeypathInput];
-        [self removeObserver:self forKeyPath:kObserverKeypathoutput];
-        
         [self.input removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
         [self.input close];
         self.input = nil;
@@ -149,19 +162,6 @@
         [self.output removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
         [self.output close];
         self.output = nil;
-    }
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    if (object == self.input && [keyPath isEqualToString:kObserverKeypathInput]) {
-        NSStreamStatus new = [change[NSKeyValueChangeNewKey] integerValue];
-        NSStreamStatus old = [change[NSKeyValueChangeOldKey] integerValue];
-        if (new == NSStreamStatusReading && old == NSStreamStatusOpen) {
-            [self.dataFromTCP resetBytesInRange:NSMakeRange(0, self.dataFromTCP.length)];
-        }
-    }else {
-        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
 }
 
@@ -226,7 +226,7 @@
             NSUInteger appendLength = readed;
              if (readed > 0) {
                  for (int i = 0; i < readed; i++) {
-                     if (buffer[i] == 0xed) {
+                     if (buffer[i] == 0xed) {// client will send a 0xed as a terminal flag when a JSON object has been sended,because TCP couldn't do this for us.
                          completeFlag = YES;
                          appendLength = i;
                          break;
@@ -239,7 +239,7 @@
 //                NSLog(@"data length : %ld",self.dataFromTCP.length);
                 json = [self.dataFromTCP mutableObjectFromJSONData];
 //                NSLog(@"readed json : %@",json);
-                NSImage *image = [self imageWithJSON:json];
+                NSImage *image = [self imageFromJSON:json];
                 [self.screenShot setImage:image];
             }
             break;
@@ -284,12 +284,29 @@
 }
 
 #pragma mark - image decode
-- (NSImage *)imageWithJSON:(NSDictionary *)json
+- (NSImage *)imageFromJSON:(NSDictionary *)json
 {
     NSString *base64 = json[@"data"];
     NSData *imageData = [NSData dataWithBase64EncodedString:base64];
     NSImage *image = [[NSImage alloc]initWithData:imageData];
     return image;
+}
+
+- (void)tapFeature:(NSString *)featureName
+{
+    NSImage *feature = [[NSBundle mainBundle]imageForResource:featureName];
+    CGPoint loc = [DXFeatureFinder findFeature:feature inImage:self.screenShot.image];
+    CGPoint point = CGPointMake(loc.x + feature.size.width/2, loc.y + feature.size.height/2);
+    NSImage *result = [DXFeatureFinder resultFromFeature:feature inImage:self.screenShot.image];
+    self.resultView.image = result;
+    NSLog(@"feature %@ position %@",featureName,NSStringFromPoint(NSPointFromCGPoint(loc)));
+    NSError *err = nil;
+    DXTouchCommand *testCommand;
+    testCommand = [[DXTouchCommand alloc]initWithType:CommandTap beganPoints:@[touchPointFromCGPoint(point)] endedPoints:@[touchPointFromCGPoint(point)] duration:0.3];
+    [self sendTouchCommand:testCommand error:&err];
+    if (err) {
+        NSLog(@"error occured : %@",err);
+    }
 }
 
 @end
