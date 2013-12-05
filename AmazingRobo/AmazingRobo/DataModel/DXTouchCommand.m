@@ -17,7 +17,12 @@
 
 @end
 
-NSString * touchPointFromCGPoint(CGPoint p)
+NSDictionary * touchPointFromCGPoint(CGPoint p)
+{
+    return touchPointMake(p.x, p.y);
+}
+
+NSDictionary * touchPointFromNSPoint(NSPoint p)
 {
     return touchPointMake(p.x, p.y);
 }

@@ -10,7 +10,8 @@
 
 #define touchPointMake(x,y) @{@"x":@(x),@"y":@(y)}
 
-NSString * touchPointFromCGPoint(CGPoint p);
+NSDictionary * touchPointFromCGPoint(CGPoint p);
+NSDictionary * touchPointFromNSPoint(NSPoint p);
 
 typedef NS_OPTIONS(NSUInteger, CommandType) {
     CommandTap = 0,

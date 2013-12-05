@@ -43,10 +43,13 @@
                             <action selector="panButtonTapped:" target="-2" id="ScF-ZF-QFD"/>
                         </connections>
                     </button>
-                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4ey-CX-odh">
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4ey-CX-odh" customClass="DXImageView">
                         <rect key="frame" x="55" y="58" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageAlignment="topLeft" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="Yoc-Y8-2PV"/>
+                        <connections>
+                            <outlet property="delegate" destination="-2" id="YOQ-d9-tRE"/>
+                        </connections>
                     </imageView>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HFN-pB-bOv">
                         <rect key="frame" x="44" y="13" width="118" height="32"/>
@@ -59,7 +62,7 @@
                             <action selector="tapMenuTapped:" target="-2" id="hoW-fF-NKA"/>
                         </connections>
                     </button>
-                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qfT-XS-Gg4">
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qfT-XS-Gg4" customClass="DXImageView">
                         <rect key="frame" x="427" y="58" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageAlignment="topLeft" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="ay0-IV-Zus"/>

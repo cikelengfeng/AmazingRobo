@@ -37,11 +37,8 @@ int match_method = CV_TM_CCOEFF_NORMED;
     Mat imageMat,featureMat;
     imageMat = image.CVMat;
     featureMat = feature.CVMat;
-    Mat gImg, gFtr;
-    cvtColor(imageMat, gImg, CV_BGR2GRAY);
-    cvtColor(featureMat, gFtr, CV_BGR2GRAY);
     Mat resultMat(imageMat.rows-featureMat.rows+1, imageMat.cols-featureMat.cols+1, CV_32FC1);
-    matchTemplate(gImg, gFtr, resultMat, match_method);
+    matchTemplate(imageMat, featureMat, resultMat, match_method);
     threshold(resultMat, resultMat, 0.9, 1., CV_THRESH_TOZERO);
     return resultMat;
 }

@@ -7,8 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "QServer.h"
+#import "DXImageView.h"
+#import "GCDAsyncSocket.h"
 
-@interface DXDocument : NSDocument<QServerDelegate,NSStreamDelegate>
+@interface DXDocument : NSDocument<GCDAsyncSocketDelegate,NSStreamDelegate,DXImageViewDelegate>
 
 @end

@@ -15,9 +15,28 @@
 		423AA876184D962B00E3F9DC /* NSImageView+AddMask.m in Sources */ = {isa = PBXBuildFile; fileRef = 423AA875184D962B00E3F9DC /* NSImageView+AddMask.m */; };
 		423AA87A184DC09300E3F9DC /* menu.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 423AA879184DC09300E3F9DC /* menu.PNG */; };
 		423AA87C184DCBC900E3F9DC /* buylist.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 423AA87B184DCBC900E3F9DC /* buylist.PNG */; };
+		423AA87F184DDB2700E3F9DC /* DXImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 423AA87E184DDB2700E3F9DC /* DXImageView.m */; };
 		425176281844816300C3D08D /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 425176251844816300C3D08D /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		42517630184481E000C3D08D /* DXTouchCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 4251762F184481E000C3D08D /* DXTouchCommand.m */; };
 		4271FA36184739F800EF87D0 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 4271FA35184739F800EF87D0 /* Base64.m */; };
+		427CF297185027E200B40A9A /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 427CF15C185027E000B40A9A /* .gitignore */; };
+		427CF298185027E200B40A9A /* CocoaAsyncSocket.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 427CF15D185027E000B40A9A /* CocoaAsyncSocket.podspec */; };
+		427CF299185027E200B40A9A /* Documentation.html in Resources */ = {isa = PBXBuildFile; fileRef = 427CF15F185027E000B40A9A /* Documentation.html */; };
+		427CF29A185027E200B40A9A /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 427CF161185027E000B40A9A /* GCDAsyncSocket.m */; };
+		427CF29B185027E200B40A9A /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 427CF163185027E000B40A9A /* GCDAsyncUdpSocket.m */; };
+		427CF2F1185027E200B40A9A /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 427CF240185027E200B40A9A /* README.markdown */; };
+		427CF2F2185027E200B40A9A /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 427CF243185027E200B40A9A /* AsyncSocket.m */; };
+		427CF2F3185027E200B40A9A /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 427CF245185027E200B40A9A /* AsyncUdpSocket.m */; };
+		427CF2F4185027E200B40A9A /* Documentation.html in Resources */ = {isa = PBXBuildFile; fileRef = 427CF246185027E200B40A9A /* Documentation.html */; };
+		427CF30E185027E200B40A9A /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 427CF288185027E200B40A9A /* DDAbstractDatabaseLogger.m */; };
+		427CF30F185027E200B40A9A /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 427CF28A185027E200B40A9A /* DDASLLogger.m */; };
+		427CF310185027E200B40A9A /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 427CF28C185027E200B40A9A /* DDFileLogger.m */; };
+		427CF311185027E200B40A9A /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 427CF28E185027E200B40A9A /* DDLog.m */; };
+		427CF312185027E200B40A9A /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 427CF290185027E200B40A9A /* DDTTYLogger.m */; };
+		427CF313185027E200B40A9A /* ContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 427CF293185027E200B40A9A /* ContextFilterLogFormatter.m */; };
+		427CF314185027E200B40A9A /* DispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 427CF295185027E200B40A9A /* DispatchQueueLogFormatter.m */; };
+		427CF315185027E200B40A9A /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 427CF296185027E200B40A9A /* README.txt */; };
+		427CF34A185033A300B40A9A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 427CF349185033A300B40A9A /* Security.framework */; };
 		42B0272A1843593A00ED40B4 /* DXTCPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 42B027271843593A00ED40B4 /* DXTCPServer.m */; };
 		42B0272B1843593A00ED40B4 /* QServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 42B027291843593A00ED40B4 /* QServer.m */; };
 		42C0FDF3183B4A2F004094FD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42C0FDF2183B4A2F004094FD /* Cocoa.framework */; };
@@ -55,12 +74,43 @@
 		423AA875184D962B00E3F9DC /* NSImageView+AddMask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImageView+AddMask.m"; sourceTree = "<group>"; };
 		423AA879184DC09300E3F9DC /* menu.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu.PNG; sourceTree = "<group>"; };
 		423AA87B184DCBC900E3F9DC /* buylist.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buylist.PNG; sourceTree = "<group>"; };
+		423AA87D184DDB2700E3F9DC /* DXImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXImageView.h; sourceTree = "<group>"; };
+		423AA87E184DDB2700E3F9DC /* DXImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXImageView.m; sourceTree = "<group>"; };
 		425176241844816300C3D08D /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		425176251844816300C3D08D /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		4251762E184481E000C3D08D /* DXTouchCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXTouchCommand.h; sourceTree = "<group>"; };
 		4251762F184481E000C3D08D /* DXTouchCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXTouchCommand.m; sourceTree = "<group>"; };
 		4271FA34184739F800EF87D0 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
 		4271FA35184739F800EF87D0 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
+		427CF15C185027E000B40A9A /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		427CF15D185027E000B40A9A /* CocoaAsyncSocket.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CocoaAsyncSocket.podspec; sourceTree = "<group>"; };
+		427CF15F185027E000B40A9A /* Documentation.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Documentation.html; sourceTree = "<group>"; };
+		427CF160185027E000B40A9A /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		427CF161185027E000B40A9A /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		427CF162185027E000B40A9A /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
+		427CF163185027E000B40A9A /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+		427CF240185027E200B40A9A /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
+		427CF242185027E200B40A9A /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
+		427CF243185027E200B40A9A /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncSocket.m; sourceTree = "<group>"; };
+		427CF244185027E200B40A9A /* AsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncUdpSocket.h; sourceTree = "<group>"; };
+		427CF245185027E200B40A9A /* AsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncUdpSocket.m; sourceTree = "<group>"; };
+		427CF246185027E200B40A9A /* Documentation.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Documentation.html; sourceTree = "<group>"; };
+		427CF287185027E200B40A9A /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
+		427CF288185027E200B40A9A /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
+		427CF289185027E200B40A9A /* DDASLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogger.h; sourceTree = "<group>"; };
+		427CF28A185027E200B40A9A /* DDASLLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDASLLogger.m; sourceTree = "<group>"; };
+		427CF28B185027E200B40A9A /* DDFileLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDFileLogger.h; sourceTree = "<group>"; };
+		427CF28C185027E200B40A9A /* DDFileLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDFileLogger.m; sourceTree = "<group>"; };
+		427CF28D185027E200B40A9A /* DDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLog.h; sourceTree = "<group>"; };
+		427CF28E185027E200B40A9A /* DDLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLog.m; sourceTree = "<group>"; };
+		427CF28F185027E200B40A9A /* DDTTYLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDTTYLogger.h; sourceTree = "<group>"; };
+		427CF290185027E200B40A9A /* DDTTYLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDTTYLogger.m; sourceTree = "<group>"; };
+		427CF292185027E200B40A9A /* ContextFilterLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContextFilterLogFormatter.h; sourceTree = "<group>"; };
+		427CF293185027E200B40A9A /* ContextFilterLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContextFilterLogFormatter.m; sourceTree = "<group>"; };
+		427CF294185027E200B40A9A /* DispatchQueueLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DispatchQueueLogFormatter.h; sourceTree = "<group>"; };
+		427CF295185027E200B40A9A /* DispatchQueueLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DispatchQueueLogFormatter.m; sourceTree = "<group>"; };
+		427CF296185027E200B40A9A /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		427CF349185033A300B40A9A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		429DAB33184C2E1000A4FDCE /* DXFeatureFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXFeatureFinder.h; sourceTree = "<group>"; };
 		42B027261843593A00ED40B4 /* DXTCPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXTCPServer.h; sourceTree = "<group>"; };
 		42B027271843593A00ED40B4 /* DXTCPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXTCPServer.m; sourceTree = "<group>"; };
@@ -93,6 +143,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				427CF34A185033A300B40A9A /* Security.framework in Frameworks */,
 				42362D3A184C575100649DDD /* libopencv_core.2.4.7.dylib in Frameworks */,
 				42362D29184C55AE00649DDD /* libopencv_imgproc.2.4.7.dylib in Frameworks */,
 				42C0FDF3183B4A2F004094FD /* Cocoa.framework in Frameworks */,
@@ -137,6 +188,82 @@
 			);
 			name = Base64;
 			path = ../../Base64/Base64;
+			sourceTree = "<group>";
+		};
+		427CF15B185027E000B40A9A /* CocoaAsyncSocket */ = {
+			isa = PBXGroup;
+			children = (
+				427CF15C185027E000B40A9A /* .gitignore */,
+				427CF15D185027E000B40A9A /* CocoaAsyncSocket.podspec */,
+				427CF15E185027E000B40A9A /* GCD */,
+				427CF240185027E200B40A9A /* README.markdown */,
+				427CF241185027E200B40A9A /* RunLoop */,
+				427CF285185027E200B40A9A /* Vendor */,
+			);
+			name = CocoaAsyncSocket;
+			path = ../../CocoaAsyncSocket;
+			sourceTree = "<group>";
+		};
+		427CF15E185027E000B40A9A /* GCD */ = {
+			isa = PBXGroup;
+			children = (
+				427CF15F185027E000B40A9A /* Documentation.html */,
+				427CF160185027E000B40A9A /* GCDAsyncSocket.h */,
+				427CF161185027E000B40A9A /* GCDAsyncSocket.m */,
+				427CF162185027E000B40A9A /* GCDAsyncUdpSocket.h */,
+				427CF163185027E000B40A9A /* GCDAsyncUdpSocket.m */,
+			);
+			path = GCD;
+			sourceTree = "<group>";
+		};
+		427CF241185027E200B40A9A /* RunLoop */ = {
+			isa = PBXGroup;
+			children = (
+				427CF242185027E200B40A9A /* AsyncSocket.h */,
+				427CF243185027E200B40A9A /* AsyncSocket.m */,
+				427CF244185027E200B40A9A /* AsyncUdpSocket.h */,
+				427CF245185027E200B40A9A /* AsyncUdpSocket.m */,
+				427CF246185027E200B40A9A /* Documentation.html */,
+			);
+			path = RunLoop;
+			sourceTree = "<group>";
+		};
+		427CF285185027E200B40A9A /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				427CF286185027E200B40A9A /* CocoaLumberjack */,
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
+		427CF286185027E200B40A9A /* CocoaLumberjack */ = {
+			isa = PBXGroup;
+			children = (
+				427CF287185027E200B40A9A /* DDAbstractDatabaseLogger.h */,
+				427CF288185027E200B40A9A /* DDAbstractDatabaseLogger.m */,
+				427CF289185027E200B40A9A /* DDASLLogger.h */,
+				427CF28A185027E200B40A9A /* DDASLLogger.m */,
+				427CF28B185027E200B40A9A /* DDFileLogger.h */,
+				427CF28C185027E200B40A9A /* DDFileLogger.m */,
+				427CF28D185027E200B40A9A /* DDLog.h */,
+				427CF28E185027E200B40A9A /* DDLog.m */,
+				427CF28F185027E200B40A9A /* DDTTYLogger.h */,
+				427CF290185027E200B40A9A /* DDTTYLogger.m */,
+				427CF291185027E200B40A9A /* Extensions */,
+			);
+			path = CocoaLumberjack;
+			sourceTree = "<group>";
+		};
+		427CF291185027E200B40A9A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				427CF292185027E200B40A9A /* ContextFilterLogFormatter.h */,
+				427CF293185027E200B40A9A /* ContextFilterLogFormatter.m */,
+				427CF294185027E200B40A9A /* DispatchQueueLogFormatter.h */,
+				427CF295185027E200B40A9A /* DispatchQueueLogFormatter.m */,
+				427CF296185027E200B40A9A /* README.txt */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		429DAB32184C2DF700A4FDCE /* FeatureFinder */ = {
@@ -185,6 +312,7 @@
 		42C0FDF1183B4A2F004094FD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				427CF349185033A300B40A9A /* Security.framework */,
 				42362D2C184C575100649DDD /* libopencv_core.2.4.7.dylib */,
 				42362D28184C55AE00649DDD /* libopencv_imgproc.2.4.7.dylib */,
 				42C0FDF2183B4A2F004094FD /* Cocoa.framework */,
@@ -207,6 +335,7 @@
 		42C0FDF8183B4A2F004094FD /* AmazingRobo */ = {
 			isa = PBXGroup;
 			children = (
+				427CF15B185027E000B40A9A /* CocoaAsyncSocket */,
 				429DAB32184C2DF700A4FDCE /* FeatureFinder */,
 				4271FA33184739F800EF87D0 /* Base64 */,
 				4251762D184481E000C3D08D /* DataModel */,
@@ -215,6 +344,8 @@
 				42C0FE04183B4A2F004094FD /* DXDocument.h */,
 				42C0FE05183B4A2F004094FD /* DXDocument.m */,
 				42C0FE07183B4A2F004094FD /* DXDocument.xib */,
+				423AA87D184DDB2700E3F9DC /* DXImageView.h */,
+				423AA87E184DDB2700E3F9DC /* DXImageView.m */,
 				42C0FE0A183B4A2F004094FD /* MainMenu.xib */,
 				42362D4B184C7FEF00649DDD /* hotdish.PNG */,
 				423AA879184DC09300E3F9DC /* menu.PNG */,
@@ -315,6 +446,7 @@
 			knownRegions = (
 				en,
 				Base,
+				English,
 			);
 			mainGroup = 42C0FDE6183B4A2F004094FD;
 			productRefGroup = 42C0FDF0183B4A2F004094FD /* Products */;
@@ -333,12 +465,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				423AA87A184DC09300E3F9DC /* menu.PNG in Resources */,
+				427CF2F1185027E200B40A9A /* README.markdown in Resources */,
 				42C0FDFD183B4A2F004094FD /* InfoPlist.strings in Resources */,
+				427CF2F4185027E200B40A9A /* Documentation.html in Resources */,
+				427CF299185027E200B40A9A /* Documentation.html in Resources */,
 				42C0FE0E183B4A2F004094FD /* Images.xcassets in Resources */,
 				423AA87C184DCBC900E3F9DC /* buylist.PNG in Resources */,
+				427CF298185027E200B40A9A /* CocoaAsyncSocket.podspec in Resources */,
 				42C0FE03183B4A2F004094FD /* Credits.rtf in Resources */,
 				42C0FE09183B4A2F004094FD /* DXDocument.xib in Resources */,
 				42C0FE0C183B4A2F004094FD /* MainMenu.xib in Resources */,
+				427CF315185027E200B40A9A /* README.txt in Resources */,
+				427CF297185027E200B40A9A /* .gitignore in Resources */,
 				42362D4C184C7FEF00649DDD /* hotdish.PNG in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,15 +496,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				427CF311185027E200B40A9A /* DDLog.m in Sources */,
+				427CF314185027E200B40A9A /* DispatchQueueLogFormatter.m in Sources */,
+				427CF29A185027E200B40A9A /* GCDAsyncSocket.m in Sources */,
+				427CF2F2185027E200B40A9A /* AsyncSocket.m in Sources */,
 				42362D4A184C633B00649DDD /* NSImage+OpenCV.mm in Sources */,
+				427CF313185027E200B40A9A /* ContextFilterLogFormatter.m in Sources */,
+				427CF30E185027E200B40A9A /* DDAbstractDatabaseLogger.m in Sources */,
+				427CF2F3185027E200B40A9A /* AsyncUdpSocket.m in Sources */,
+				427CF312185027E200B40A9A /* DDTTYLogger.m in Sources */,
 				4271FA36184739F800EF87D0 /* Base64.m in Sources */,
 				42B0272B1843593A00ED40B4 /* QServer.m in Sources */,
 				423AA876184D962B00E3F9DC /* NSImageView+AddMask.m in Sources */,
 				42362D47184C5EE400649DDD /* DXFeatureFinder.mm in Sources */,
+				427CF310185027E200B40A9A /* DDFileLogger.m in Sources */,
 				42C0FE06183B4A2F004094FD /* DXDocument.m in Sources */,
 				42C0FDFF183B4A2F004094FD /* main.m in Sources */,
 				42517630184481E000C3D08D /* DXTouchCommand.m in Sources */,
 				42B0272A1843593A00ED40B4 /* DXTCPServer.m in Sources */,
+				423AA87F184DDB2700E3F9DC /* DXImageView.m in Sources */,
+				427CF29B185027E200B40A9A /* GCDAsyncUdpSocket.m in Sources */,
+				427CF30F185027E200B40A9A /* DDASLLogger.m in Sources */,
 				425176281844816300C3D08D /* JSONKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

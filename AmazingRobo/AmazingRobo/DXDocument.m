@@ -22,10 +22,8 @@
 - (IBAction)tapHotDishesTapped:(id)sender;
 - (IBAction)tapRightTopButtonTapped:(id)sender;
 
-@property (strong,nonatomic) QServer *server;
-@property (strong,nonatomic) NSInputStream *input;
-@property (strong,nonatomic) NSOutputStream *output;
-@property (strong,nonatomic) NSMutableData *dataFromTCP;
+@property (strong,nonatomic) GCDAsyncSocket *serverSocket;
+@property (strong,nonatomic) GCDAsyncSocket *connectSocket;
 
 @property (weak) IBOutlet NSImageView *screenShot;
 @property (weak) IBOutlet NSImageView *resultView;
@@ -39,7 +37,7 @@
     self = [super init];
     if (self) {
         // Add your subclass-specific initialization here.
-        _server = [[QServer alloc]initWithDomain:nil type:nil name:nil preferredPort:7751];
+        _serverSocket = [[GCDAsyncSocket alloc]initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
     }
     return self;
 }
@@ -55,9 +53,9 @@
 {
     [super windowControllerDidLoadNib:aController];
     // Add any code here that needs to be executed once the windowController has loaded the document's window.
-    if (!self.server.isStarted) {
-        self.server.delegate = self;
-        [self.server start];
+    if (!self.serverSocket.isConnected) {
+        NSError *err = nil;
+        [self.serverSocket acceptOnPort:7751 error:&err];
     }
 }
 
@@ -86,13 +84,7 @@
 }
 
 - (IBAction)tapLeftTopButtonTapped:(NSButton *)sender {
-    NSError *err = nil;
-    DXTouchCommand *testCommand;
-    testCommand = [[DXTouchCommand alloc]initWithType:CommandTap beganPoints:@[touchPointMake(30, 30)] endedPoints:@[touchPointMake(30, 30)] duration:0.3];
-    [self sendTouchCommand:testCommand error:&err];
-    if (err) {
-        NSLog(@"error occured : %@",err);
-    }
+    [self tapPoint:CGPointMake(30, 30)];
 }
 
 - (IBAction)panButtonTapped:(id)sender {
@@ -102,9 +94,9 @@
     testCommand1 = [[DXTouchCommand alloc]initWithType:CommandPan beganPoints:@[touchPointMake(30, 30)] endedPoints:@[touchPointMake(290, 30)] duration:0.3];
     testCommand2 = [[DXTouchCommand alloc]initWithType:CommandPan beganPoints:@[touchPointMake(290, 30)] endedPoints:@[touchPointMake(30, 30)] duration:0.3];
     if (flag) {
-        [self sendTouchCommand:testCommand1 error:&err];//pan from (30,30) to (290,30)
+        [self sendTouchCommand:testCommand1];//pan from (30,30) to (290,30)
     }else {
-        [self sendTouchCommand:testCommand2 error:&err];//pan from (290,30) to (30,30)
+        [self sendTouchCommand:testCommand2];//pan from (290,30) to (30,30)
     }
     flag = !flag;
     if (err) {
@@ -125,159 +117,80 @@
 }
 
 - (IBAction)tapRightTopButtonTapped:(id)sender {
-    NSError *err = nil;
-    DXTouchCommand *testCommand;
-    testCommand = [[DXTouchCommand alloc]initWithType:CommandTap beganPoints:@[touchPointMake(290, 30)] endedPoints:@[touchPointMake(290, 30)] duration:0.3];
-    [self sendTouchCommand:testCommand error:&err];
-    if (err) {
-        NSLog(@"error occured : %@",err);
-    }
+    [self tapPoint:CGPointMake(290, 30)];
 }
 
-- (void)openStreams
+- (void)waitIncomingData
 {
-    assert(self.input != nil);            // streams must exist but aren't open
-    assert(self.output != nil);
-    
-    [self.input  setDelegate:self];
-    [self.input  scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-    [self.input  open];
-    
-    [self.output setDelegate:self];
-    [self.output scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-    [self.output open];
-    
+    assert([self.connectSocket isConnected]);
+    uint8_t terminal[1] = {0xed};
+    NSData *seperator = [NSData dataWithBytes:terminal length:1];
+    [self.connectSocket readDataToData:seperator withTimeout:-1 tag:0xed];
 }
 
-- (void)closeStreams
+#pragma mark - GCDSokcet delegate
+
+- (void)socket:(GCDAsyncSocket *)sock didAcceptNewSocket:(GCDAsyncSocket *)newSocket
 {
-    assert( (self.input != nil) == (self.output != nil) );      // should either have both or neither
-    if (self.input != nil) {
-        [self.server closeOneConnection:self];
+    self.connectSocket = newSocket;
+    [self waitIncomingData];
+}
+
+- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
+{
+    [self waitIncomingData];
+    if (tag == 0xed) {
+        NSData *readed = [NSData dataWithBytes:data.bytes length:data.length - 1];
+        NSDictionary *json = [readed mutableObjectFromJSONData];
+        if (json) {
+            NSImage *image = [self imageFromJSON:json];
+            self.screenShot.image = image;
+        }
         
-        [self.input removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-        [self.input close];
-        self.input = nil;
-        
-        [self.output removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-        [self.output close];
-        self.output = nil;
     }
 }
 
-- (NSMutableData *)dataFromTCP
+-(void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag
 {
-    if (!_dataFromTCP) {
-        _dataFromTCP = [NSMutableData data];
-    }
-    return _dataFromTCP;
+    [self waitIncomingData];
 }
 
-#pragma mark - QServer delegate
-
-- (id)server:(QServer *)server connectionForInputStream:(NSInputStream *)inputStream outputStream:(NSOutputStream *)outputStream
+- (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err
 {
-    id result;
-    
-    assert(server == self.server);
-#pragma unused(server)
-    assert(inputStream != nil);
-    assert(outputStream != nil);
-    
-    assert( (self.input != nil) == (self.output != nil) );      // should either have both or neither
-    
-    if (self.input != nil) {
-        result = nil;
-    } else {
-        // Latch the input and output sterams and kick off an open.
-        
-        self.input = inputStream;
-        self.output = outputStream;
-        [self openStreams];
-        
-        result = self;
-    }
-    
-    return result;
+    NSLog(@"socket %@ did disconnect with error %@",sock,err);
 }
 
-- (void)server:(QServer *)server closeConnection:(id)connection
-{
-    [self closeStreams];
-}
+#pragma mark - dx image view delegate
 
-#pragma mark - NSStream delegate
-
-- (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode
+- (void)dxImageView:(DXImageView *)view mouseDown:(NSPoint)point
 {
-    int const bufferSize = 2<<14;
-    static uint8_t buffer[bufferSize] = {0};
-    NSInteger readed = 0;
-    static BOOL completeFlag;
-    NSMutableDictionary *json;
-    if (completeFlag) {
-        [self.dataFromTCP setLength:0];
-        completeFlag = NO;
-    }
-    switch (eventCode) {
-        case NSStreamEventHasBytesAvailable:
-            memset(buffer, 0, sizeof(buffer));
-            readed = [self.input read:buffer maxLength:bufferSize];
-            NSUInteger appendLength = readed;
-             if (readed > 0) {
-                 for (int i = 0; i < readed; i++) {
-                     if (buffer[i] == 0xed) {// client will send a 0xed as a terminal flag when a JSON object has been sended,because TCP couldn't do this for us.
-                         completeFlag = YES;
-                         appendLength = i;
-                         break;
-                     }
-                 }
-                 [self.dataFromTCP appendBytes:buffer length:appendLength];
-             }
-//            NSLog(@"readed : %ld",readed);
-            if (completeFlag) {
-//                NSLog(@"data length : %ld",self.dataFromTCP.length);
-                json = [self.dataFromTCP mutableObjectFromJSONData];
-//                NSLog(@"readed json : %@",json);
-                NSImage *image = [self imageFromJSON:json];
-                [self.screenShot setImage:image];
-            }
-            break;
-        case NSStreamEventEndEncountered:
-            NSLog(@"NSStreamEventEndEncountered");
-            [self closeStreams];
-            break;
-        case NSStreamEventErrorOccurred:
-            NSLog(@"NSStreamEventErrorOccurred : %@",aStream.streamError);
-            break;
-        case NSStreamEventOpenCompleted:
-            NSLog(@"NSStreamEventOpenCompleted");
-            break;
-        case NSStreamEventHasSpaceAvailable:
-            NSLog(@"NSStreamEventHasSpaceAvailable");
-            break;
-        default:
-            break;
-    }
+    CGSize s = view.bounds.size;
+    CGPoint p = CGPointMake(point.x, s.height - point.y);
+    [self tapPoint:NSPointToCGPoint(p)];
 }
 
 #pragma mark - send data
-- (void)sendString:(NSString *)data error:(NSError *__autoreleasing *)err
+- (void)sendBytes:(void *)bytes maxLength:(NSUInteger)length
 {
-    NSLog(@"sending string : %@",data);
-    NSInteger result;
-    uint8_t *buffer = (uint8_t *)data.UTF8String;
-    result = [self.output write:buffer maxLength:data.length];
-    if (result == -1) {
-        *err = self.output.streamError;
-        return;
+    if ([self.connectSocket isConnected]) {
+        NSMutableData *sending = [NSMutableData dataWithBytes:bytes length:length];
+        uint8_t terminal[1] = {0xed};
+        [sending appendBytes:terminal length:1];
+        [self.connectSocket writeData:sending withTimeout:-1 tag:0xed];
     }
+    
 }
 
-- (void)sendTouchCommand:(DXTouchCommand *)command error:(NSError *__autoreleasing *)err
+- (void)sendString:(NSString *)data
+{
+    uint8_t *buffer = (uint8_t *)data.UTF8String;
+    [self sendBytes:buffer maxLength:data.length];
+}
+
+- (void)sendTouchCommand:(DXTouchCommand *)command
 {
     if (command) {
-        [self sendString:[command toJSONString] error:err];
+        [self sendString:[command toJSONString]];
     }else {
         NSLog(@"command is nil");
     }
@@ -300,13 +213,14 @@
     NSImage *result = [DXFeatureFinder resultFromFeature:feature inImage:self.screenShot.image];
     self.resultView.image = result;
     NSLog(@"feature %@ position %@",featureName,NSStringFromPoint(NSPointFromCGPoint(loc)));
-    NSError *err = nil;
+    [self tapPoint:point];
+}
+
+- (void)tapPoint:(CGPoint)point
+{
     DXTouchCommand *testCommand;
     testCommand = [[DXTouchCommand alloc]initWithType:CommandTap beganPoints:@[touchPointFromCGPoint(point)] endedPoints:@[touchPointFromCGPoint(point)] duration:0.3];
-    [self sendTouchCommand:testCommand error:&err];
-    if (err) {
-        NSLog(@"error occured : %@",err);
-    }
+    [self sendTouchCommand:testCommand];
 }
 
 @end

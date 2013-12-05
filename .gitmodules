@@ -1,3 +1,6 @@
 [submodule "Base64"]
 	path = Base64
 	url = https://github.com/nicklockwood/Base64.git
+[submodule "CocoaAsyncSocket"]
+	path = CocoaAsyncSocket
+	url = https://github.com/robbiehanson/CocoaAsyncSocket.git
