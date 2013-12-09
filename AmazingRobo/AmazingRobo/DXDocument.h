@@ -8,8 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 #import "DXImageView.h"
-#import "GCDAsyncSocket.h"
+#import "DXTestEngine.h"
 
-@interface DXDocument : NSDocument<GCDAsyncSocketDelegate,NSStreamDelegate,DXImageViewDelegate>
+@interface DXDocument : NSDocument<DXImageViewDelegate,DXTestEngineDelegate>
 
 @end

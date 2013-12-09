@@ -37,8 +37,9 @@
 		427CF314185027E200B40A9A /* DispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 427CF295185027E200B40A9A /* DispatchQueueLogFormatter.m */; };
 		427CF315185027E200B40A9A /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 427CF296185027E200B40A9A /* README.txt */; };
 		427CF34A185033A300B40A9A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 427CF349185033A300B40A9A /* Security.framework */; };
-		42B0272A1843593A00ED40B4 /* DXTCPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 42B027271843593A00ED40B4 /* DXTCPServer.m */; };
-		42B0272B1843593A00ED40B4 /* QServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 42B027291843593A00ED40B4 /* QServer.m */; };
+		42A29B141855855100B835BE /* DXTestSuite.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A29B131855855100B835BE /* DXTestSuite.m */; };
+		42A29B171855968300B835BE /* XcfHomeTestSuite.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A29B161855968300B835BE /* XcfHomeTestSuite.m */; };
+		42A29B1A18559B4300B835BE /* DXTestEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A29B1918559B4300B835BE /* DXTestEngine.m */; };
 		42C0FDF3183B4A2F004094FD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42C0FDF2183B4A2F004094FD /* Cocoa.framework */; };
 		42C0FDFD183B4A2F004094FD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 42C0FDFB183B4A2F004094FD /* InfoPlist.strings */; };
 		42C0FDFF183B4A2F004094FD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C0FDFE183B4A2F004094FD /* main.m */; };
@@ -112,10 +113,12 @@
 		427CF296185027E200B40A9A /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		427CF349185033A300B40A9A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		429DAB33184C2E1000A4FDCE /* DXFeatureFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXFeatureFinder.h; sourceTree = "<group>"; };
-		42B027261843593A00ED40B4 /* DXTCPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXTCPServer.h; sourceTree = "<group>"; };
-		42B027271843593A00ED40B4 /* DXTCPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXTCPServer.m; sourceTree = "<group>"; };
-		42B027281843593A00ED40B4 /* QServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QServer.h; sourceTree = "<group>"; };
-		42B027291843593A00ED40B4 /* QServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QServer.m; sourceTree = "<group>"; };
+		42A29B121855855100B835BE /* DXTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXTestSuite.h; sourceTree = "<group>"; };
+		42A29B131855855100B835BE /* DXTestSuite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXTestSuite.m; sourceTree = "<group>"; };
+		42A29B151855968300B835BE /* XcfHomeTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XcfHomeTestSuite.h; sourceTree = "<group>"; };
+		42A29B161855968300B835BE /* XcfHomeTestSuite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XcfHomeTestSuite.m; sourceTree = "<group>"; };
+		42A29B1818559B4300B835BE /* DXTestEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXTestEngine.h; sourceTree = "<group>"; };
+		42A29B1918559B4300B835BE /* DXTestEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXTestEngine.m; sourceTree = "<group>"; };
 		42C0FDEF183B4A2F004094FD /* AmazingRobo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AmazingRobo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42C0FDF2183B4A2F004094FD /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		42C0FDF5183B4A2F004094FD /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -279,15 +282,15 @@
 			path = FeatureFinder;
 			sourceTree = "<group>";
 		};
-		42B027251843593A00ED40B4 /* TCPServer */ = {
+		42A29B111855854500B835BE /* TestSuite */ = {
 			isa = PBXGroup;
 			children = (
-				42B027261843593A00ED40B4 /* DXTCPServer.h */,
-				42B027271843593A00ED40B4 /* DXTCPServer.m */,
-				42B027281843593A00ED40B4 /* QServer.h */,
-				42B027291843593A00ED40B4 /* QServer.m */,
+				42A29B121855855100B835BE /* DXTestSuite.h */,
+				42A29B131855855100B835BE /* DXTestSuite.m */,
+				42A29B151855968300B835BE /* XcfHomeTestSuite.h */,
+				42A29B161855968300B835BE /* XcfHomeTestSuite.m */,
 			);
-			path = TCPServer;
+			path = TestSuite;
 			sourceTree = "<group>";
 		};
 		42C0FDE6183B4A2F004094FD = {
@@ -335,14 +338,16 @@
 		42C0FDF8183B4A2F004094FD /* AmazingRobo */ = {
 			isa = PBXGroup;
 			children = (
+				42A29B111855854500B835BE /* TestSuite */,
 				427CF15B185027E000B40A9A /* CocoaAsyncSocket */,
 				429DAB32184C2DF700A4FDCE /* FeatureFinder */,
 				4271FA33184739F800EF87D0 /* Base64 */,
 				4251762D184481E000C3D08D /* DataModel */,
 				425176221844816300C3D08D /* JSONKit */,
-				42B027251843593A00ED40B4 /* TCPServer */,
 				42C0FE04183B4A2F004094FD /* DXDocument.h */,
 				42C0FE05183B4A2F004094FD /* DXDocument.m */,
+				42A29B1818559B4300B835BE /* DXTestEngine.h */,
+				42A29B1918559B4300B835BE /* DXTestEngine.m */,
 				42C0FE07183B4A2F004094FD /* DXDocument.xib */,
 				423AA87D184DDB2700E3F9DC /* DXImageView.h */,
 				423AA87E184DDB2700E3F9DC /* DXImageView.m */,
@@ -506,16 +511,17 @@
 				427CF2F3185027E200B40A9A /* AsyncUdpSocket.m in Sources */,
 				427CF312185027E200B40A9A /* DDTTYLogger.m in Sources */,
 				4271FA36184739F800EF87D0 /* Base64.m in Sources */,
-				42B0272B1843593A00ED40B4 /* QServer.m in Sources */,
 				423AA876184D962B00E3F9DC /* NSImageView+AddMask.m in Sources */,
 				42362D47184C5EE400649DDD /* DXFeatureFinder.mm in Sources */,
 				427CF310185027E200B40A9A /* DDFileLogger.m in Sources */,
+				42A29B141855855100B835BE /* DXTestSuite.m in Sources */,
 				42C0FE06183B4A2F004094FD /* DXDocument.m in Sources */,
 				42C0FDFF183B4A2F004094FD /* main.m in Sources */,
+				42A29B171855968300B835BE /* XcfHomeTestSuite.m in Sources */,
 				42517630184481E000C3D08D /* DXTouchCommand.m in Sources */,
-				42B0272A1843593A00ED40B4 /* DXTCPServer.m in Sources */,
 				423AA87F184DDB2700E3F9DC /* DXImageView.m in Sources */,
 				427CF29B185027E200B40A9A /* GCDAsyncUdpSocket.m in Sources */,
+				42A29B1A18559B4300B835BE /* DXTestEngine.m in Sources */,
 				427CF30F185027E200B40A9A /* DDASLLogger.m in Sources */,
 				425176281844816300C3D08D /* JSONKit.m in Sources */,
 			);

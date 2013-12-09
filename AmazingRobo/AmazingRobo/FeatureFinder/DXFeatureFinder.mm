@@ -26,6 +26,9 @@ int match_method = CV_TM_CCOEFF_NORMED;
     if( match_method  == CV_TM_SQDIFF || match_method == CV_TM_SQDIFF_NORMED ) {
         matchLoc = minLoc;
     }else{
+        if (maxVal < 0.9) {
+            return CGPointMake(-1, -1);
+        }
         matchLoc = maxLoc;
     }
     NSLog(@"min %f , max %f",minVal,maxVal);
