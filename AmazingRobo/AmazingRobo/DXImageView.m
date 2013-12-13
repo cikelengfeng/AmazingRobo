@@ -80,16 +80,27 @@
 }
 
 - (NSBitmapImageRep *)getClippedBitmap
-{
+{/*我们得到的_clipRect的原点是左下角，并且长度单位都是CGImage的一半(Retina，其他像素密度对应不同的scaling)，所以我们将原点x，长，宽直接乘2，ImageView的高减clipRect的原点y减_clipRect的高再乘2得到图片坐标系下的原点y
+            nsimage                           cgimage
+            +-----------+                     +------------------------+
+            | clipRect  |                     |                        |
+            |   +--+    |                     |                        |
+            |   |  |    |                     |      rectInImage       |
+            |o1 +--+    |                     |     o2 +----+          |
+            |           |                     |        |    |          |
+            +-----------+                     |        |    |          |
+                                              |        +----+          |
+                                              |                        |
+                                              |                        |
+                                              |                        |
+                                              +------------------------+
+  
+  */
     CGRect rectInImage = CGRectMake(_clipRect.origin.x * 2, (self.bounds.size.height - _clipRect.origin.y - _clipRect.size.height)*2, _clipRect.size.width*2, _clipRect.size.height*2);
-    NSLog(@"clipped rect dst %@",NSStringFromRect(NSRectFromCGRect(rectInImage)));
-    NSLog(@"clipped rect ori %@",NSStringFromRect(NSRectFromCGRect(_clipRect)));
     CGImageRef cgOriginImg = [self.image CGImageForProposedRect:nil context:[NSGraphicsContext currentContext] hints:nil];
     CGImageRef cgClippedImg = CGImageCreateWithImageInRect(cgOriginImg,rectInImage);
-    CGFloat cgw = CGImageGetWidth(cgOriginImg);
-    CGFloat cgh = CGImageGetHeight(cgOriginImg);
-    NSLog(@"cgimage width %f , height %f",cgw,cgh);
     NSBitmapImageRep *image = [[NSBitmapImageRep alloc]initWithCGImage:cgClippedImg];
+    //由于从CGImage上截下来的图是双倍(Retina，其他像素密度对应不同的scaling)尺寸，所以要把尺寸设置为_clipRect的尺寸
     image.size = _clipRect.size;
     CGImageRelease(cgClippedImg);
     return image;
