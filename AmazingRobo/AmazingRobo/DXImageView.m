@@ -81,7 +81,7 @@
 
 - (NSBitmapImageRep *)getClippedBitmap
 {/*我们得到的_clipRect的原点是左下角，并且长度单位都是CGImage的一半(Retina，其他像素密度对应不同的scaling)，所以我们将原点x，长，宽直接乘2，ImageView的高减clipRect的原点y减_clipRect的高再乘2得到图片坐标系下的原点y
-            nsimage                           cgimage
+            nsview                            cgimage
             +-----------+                     +------------------------+
             | clipRect  |                     |                        |
             |   +--+    |                     |                        |
