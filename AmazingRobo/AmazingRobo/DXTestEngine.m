@@ -128,9 +128,16 @@
     return image;
 }
 
+- (NSImage *)imageFromFileByName:(NSString *)name
+{
+    NSString *path = [[NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"AmazingRobo/features/%@",name]]stringByAppendingPathExtension:@"png"];
+    NSImage *img = [[NSImage alloc]initWithContentsOfFile:path];
+    return img;
+}
+
 - (void)tapFeature:(NSString *)featureName
 {
-    NSImage *feature = [[NSBundle mainBundle]imageForResource:featureName];
+    NSImage *feature = [self imageFromFileByName:featureName];
     CGPoint loc = [self findFeature:feature];
     CGPoint point = CGPointMake(loc.x + feature.size.width/2, loc.y + feature.size.height/2);
     NSLog(@"feature %@ position %@",featureName,NSStringFromPoint(NSPointFromCGPoint(loc)));
@@ -158,9 +165,15 @@
     return loc;
 }
 
+- (CGPoint)findFeatureByName:(NSString *)featureName
+{
+    NSImage *feature = [self imageFromFileByName:featureName];
+    return [self findFeature:feature];
+}
+
 - (BOOL)hasFeature:(NSString *)featureName
 {
-    NSImage *feature = [[NSBundle mainBundle]imageForResource:featureName];
+    NSImage *feature = [self imageFromFileByName:featureName];
     CGPoint loc = [self findFeature:feature];
     return loc.x > 0 && loc.y > 0;
 }

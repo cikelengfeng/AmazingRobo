@@ -17,6 +17,9 @@ int match_method = CV_TM_CCOEFF_NORMED;
 
 + (CGPoint)findFeature:(NSImage *)feature inImage:(NSImage *)image
 {
+    if (!feature) {
+        return CGPointMake(-1, -1);
+    }
     Mat resultMat = [self resultMatFromFeature:feature inImage:image];
     
     double minVal; double maxVal; cv::Point minLoc; cv::Point maxLoc;
@@ -48,6 +51,9 @@ int match_method = CV_TM_CCOEFF_NORMED;
 
 + (NSImage *)resultFromFeature:(NSImage *)feature inImage:(NSImage *)image
 {
+    if (!feature) {
+        return nil;
+    }
     return [NSImage imageWithCVMat:[self resultMatFromFeature:feature inImage:image]];
 }
 

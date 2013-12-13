@@ -23,12 +23,14 @@
 - (IBAction)tapHotDishesTapped:(id)sender;
 - (IBAction)tapRightTopButtonTapped:(id)sender;
 - (IBAction)clipButtonTapped:(id)sender;
+- (IBAction)findClippedButtonTapped:(id)sender;
 
 @property (strong,nonatomic) DXTestEngine *engine;
 
 @property (weak) IBOutlet DXImageView *screenShot;
 @property (weak) IBOutlet NSImageView *resultView;
 @property (weak) IBOutlet NSTextField *fileNameView;
+@property (weak) IBOutlet NSTextField *findResultView;
 
 @end
 
@@ -124,11 +126,17 @@
     NSImage *clipped = [self.screenShot getClippedImage];
     self.resultView.image = clipped;
     NSString *fileName = self.fileNameView.stringValue.length > 0 ? self.fileNameView.stringValue : [NSString stringWithFormat:@"%f",[NSDate date].timeIntervalSinceReferenceDate];
-    NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"AmazingRobo/features/%@",fileName]];
+    NSString *path = [[NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"AmazingRobo/features/%@",fileName]]stringByAppendingPathExtension:@"png"];
     BOOL result = [self.screenShot saveClippedImageToPath:path];
     if (result) {
         NSLog(@"clipped image has been saved into %@",path);
     }
+}
+
+- (IBAction)findClippedButtonTapped:(id)sender {
+    self.findResultView.stringValue = @"";
+    CGPoint result = [self.engine findFeatureByName:self.fileNameView.stringValue];
+    self.findResultView.stringValue = NSStringFromPoint(result);
 }
 
 #pragma mark - dx image view delegate

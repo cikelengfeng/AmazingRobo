@@ -29,6 +29,7 @@
 - (void)sendTouchCommand:(DXTouchCommand *)command;
 
 - (CGPoint)findFeature:(NSImage *)feature;
+- (CGPoint)findFeatureByName:(NSString *)featureName;
 - (BOOL)hasFeature:(NSString *)featureName;
 
 @end

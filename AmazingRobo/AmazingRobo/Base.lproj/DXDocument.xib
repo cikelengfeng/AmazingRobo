@@ -7,6 +7,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="DXDocument">
             <connections>
                 <outlet property="fileNameView" destination="sA3-2I-r6y" id="Jlx-qL-3UY"/>
+                <outlet property="findResultView" destination="1BQ-De-hEj" id="Zw9-LW-sEB"/>
                 <outlet property="resultView" destination="qfT-XS-Gg4" id="eaS-a8-Oba"/>
                 <outlet property="screenShot" destination="4ey-CX-odh" id="iAB-8M-kgD"/>
                 <outlet property="window" destination="5" id="18"/>
@@ -119,6 +120,26 @@
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nL2-qi-OBb">
+                        <rect key="frame" x="374" y="2" width="122" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="find clipped" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="T7F-B0-qJw">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="findClippedButtonTapped:" target="-2" id="nxD-hM-yLu"/>
+                        </connections>
+                    </button>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1BQ-De-hEj">
+                        <rect key="frame" x="503" y="9" width="127" height="23"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="5n3-n6-Us4">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                 </subviews>
