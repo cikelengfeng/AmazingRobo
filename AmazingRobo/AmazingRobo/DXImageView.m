@@ -37,7 +37,11 @@
                                currentContext] graphicsPort];
     // ********** Your drawing code here ********** // 2
     CGContextSetRGBStrokeColor(myContext, 1, 0, 0, 1);
-    CGContextStrokeRectWithWidth(myContext, _clipRect, 2);
+    CGContextStrokeRectWithWidth(myContext, self.clipRect, 2);
+    
+    CGContextSetRGBStrokeColor(myContext, 0, 0, 1, 1);
+    CGContextStrokeRectWithWidth(myContext, self.rectangleMask, 2);
+    
 }
 
 - (void)setImage:(NSImage *)newImage
@@ -53,7 +57,6 @@
 {
     if (theEvent.type == NSLeftMouseDown) {
         NSPoint point = [self convertPoint:theEvent.locationInWindow fromView:self.window.contentView];
-//        [self.delegate dxImageView:self mouseDown:point];
         _startPoint.x = point.x;
         _startPoint.y = point.y;
     }
@@ -65,7 +68,6 @@
         NSPoint point = [self convertPoint:theEvent.locationInWindow fromView:self.window.contentView];
         point.x = MIN(self.image.size.width,MAX(0,point.x));
         point.y = MIN(self.image.size.height,MAX(0,point.y));
-        //        [self.delegate dxImageView:self mouseDown:point];
         CGPoint offset = CGPointMake(point.x - _startPoint.x, point.y - _startPoint.y);
         _clipRect = CGRectMake(_startPoint.x + (offset.x >= 0 ? 0 : offset.x), _startPoint.y + (offset.y >= 0 ? 0 : offset.y), ABS(offset.x), ABS(offset.y));
         [self setNeedsDisplay:YES];
@@ -120,4 +122,9 @@
     return result;
 }
 
+- (void)setRectangleMask:(NSRect)rectangleMask
+{
+    _rectangleMask = rectangleMask;
+    [self setNeedsDisplay:YES];
+}
 @end

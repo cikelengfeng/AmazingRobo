@@ -24,6 +24,7 @@
 - (IBAction)tapRightTopButtonTapped:(id)sender;
 - (IBAction)clipButtonTapped:(id)sender;
 - (IBAction)findClippedButtonTapped:(id)sender;
+- (IBAction)fileNameInputComplete:(id)sender;
 
 @property (strong,nonatomic) DXTestEngine *engine;
 
@@ -126,7 +127,7 @@
     NSImage *clipped = [self.screenShot getClippedImage];
     self.resultView.image = clipped;
     NSString *fileName = self.fileNameView.stringValue.length > 0 ? self.fileNameView.stringValue : [NSString stringWithFormat:@"%f",[NSDate date].timeIntervalSinceReferenceDate];
-    NSString *path = [[NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"AmazingRobo/features/%@",fileName]]stringByAppendingPathExtension:@"png"];
+    NSString *path = [[[[NSHomeDirectory() stringByAppendingPathComponent:@"AmazingRobo"] stringByAppendingPathComponent:@"features"] stringByAppendingPathComponent:fileName] stringByAppendingPathExtension:@"png"];
     BOOL result = [self.screenShot saveClippedImageToPath:path];
     if (result) {
         NSLog(@"clipped image has been saved into %@",path);
@@ -134,9 +135,15 @@
 }
 
 - (IBAction)findClippedButtonTapped:(id)sender {
-    self.findResultView.stringValue = @"";
-    CGPoint result = [self.engine findFeatureByName:self.fileNameView.stringValue];
-    self.findResultView.stringValue = NSStringFromPoint(result);
+    CGRect result = [self.engine findFeatureByName:self.fileNameView.stringValue];
+    self.findResultView.stringValue = NSStringFromRect(result);
+    CGRect drawMaskRect = CGRectMake(result.origin.x, self.screenShot.bounds.size.height - result.origin.y - result.size.height, result.size.width, result.size.height);
+    NSLog(@"drawMaskRect %@",NSStringFromRect(drawMaskRect));
+    [self.screenShot setRectangleMask:drawMaskRect];
+}
+
+- (IBAction)fileNameInputComplete:(id)sender {
+    [self findClippedButtonTapped:nil];
 }
 
 #pragma mark - dx image view delegate

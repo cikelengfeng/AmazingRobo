@@ -24,6 +24,7 @@
 @interface DXImageView : NSImageView
 
 @property (strong,nonatomic)  id<DXImageViewDelegate> IBOutlet delegate;
+@property (assign,nonatomic) NSRect rectangleMask;
 
 - (NSImage *)getClippedImage;
 - (BOOL)saveClippedImageToPath:(NSString *)path;

@@ -11,14 +11,16 @@
 
 using namespace cv;
 
+#define kThreshold 0.85
+
 @implementation DXFeatureFinder
 
 int match_method = CV_TM_CCOEFF_NORMED;
 
-+ (CGPoint)findFeature:(NSImage *)feature inImage:(NSImage *)image
++ (CGRect)findFeature:(NSImage *)feature inImage:(NSImage *)image
 {
     if (!feature) {
-        return CGPointMake(-1, -1);
+        return CGRectMake(-1, -1, 0, 0);
     }
     Mat resultMat = [self resultMatFromFeature:feature inImage:image];
     
@@ -29,13 +31,13 @@ int match_method = CV_TM_CCOEFF_NORMED;
     if( match_method  == CV_TM_SQDIFF || match_method == CV_TM_SQDIFF_NORMED ) {
         matchLoc = minLoc;
     }else{
-        if (maxVal < 0.9) {
-            return CGPointMake(-1, -1);
+        if (maxVal < kThreshold) {
+            return CGRectMake(-1, -1, 0, 0);
         }
         matchLoc = maxLoc;
     }
     NSLog(@"min %f , max %f",minVal,maxVal);
-    return CGPointMake(matchLoc.x, matchLoc.y);
+    return CGRectMake(matchLoc.x, matchLoc.y, feature.size.width, feature.size.height);
 }
 
 + (Mat)resultMatFromFeature:(NSImage *)feature inImage:(NSImage *)image
@@ -45,7 +47,7 @@ int match_method = CV_TM_CCOEFF_NORMED;
     featureMat = feature.CVMat;
     Mat resultMat(imageMat.rows-featureMat.rows+1, imageMat.cols-featureMat.cols+1, CV_32FC1);
     matchTemplate(imageMat, featureMat, resultMat, match_method);
-    threshold(resultMat, resultMat, 0.9, 1., CV_THRESH_TOZERO);
+    threshold(resultMat, resultMat, kThreshold, 1., CV_THRESH_TOZERO);
     return resultMat;
 }
 

@@ -10,7 +10,7 @@
 
 @interface DXFeatureFinder : NSObject
 
-+ (CGPoint)findFeature:(NSImage *)feature inImage:(NSImage *)image;
++ (CGRect)findFeature:(NSImage *)feature inImage:(NSImage *)image;
 
 + (NSImage *)resultFromFeature:(NSImage *)feature inImage:(NSImage *)image;
 

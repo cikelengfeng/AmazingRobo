@@ -130,15 +130,18 @@
 
 - (NSImage *)imageFromFileByName:(NSString *)name
 {
-    NSString *path = [[NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"AmazingRobo/features/%@",name]]stringByAppendingPathExtension:@"png"];
+    NSString *path = [[[[NSHomeDirectory() stringByAppendingPathComponent:@"AmazingRobo"] stringByAppendingPathComponent:@"features"] stringByAppendingPathComponent:name] stringByAppendingPathExtension:@"png"];
     NSImage *img = [[NSImage alloc]initWithContentsOfFile:path];
+    if (!img) {
+        NSLog(@"image named %@ is not founded",name);
+    }
     return img;
 }
 
 - (void)tapFeature:(NSString *)featureName
 {
     NSImage *feature = [self imageFromFileByName:featureName];
-    CGPoint loc = [self findFeature:feature];
+    CGPoint loc = [self findFeature:feature].origin;
     CGPoint point = CGPointMake(loc.x + feature.size.width/2, loc.y + feature.size.height/2);
     NSLog(@"feature %@ position %@",featureName,NSStringFromPoint(NSPointFromCGPoint(loc)));
     [self tapPoint:point];
@@ -153,19 +156,19 @@
 
 #pragma mark - find feature
 
-- (CGPoint)findFeature:(NSImage *)feature
+- (CGRect)findFeature:(NSImage *)feature
 {
-    CGPoint loc = [DXFeatureFinder findFeature:feature inImage:self.screenShot];
+    CGRect result = [DXFeatureFinder findFeature:feature inImage:self.screenShot];
 #ifdef DEBUG
     if ([self.delegate respondsToSelector:@selector(testEngine:hasNewScreenShot:)]) {
         NSImage *result = [DXFeatureFinder resultFromFeature:feature inImage:self.screenShot];
         [self.delegate testEngine:self hasNewMatchResult:result];
     }
 #endif
-    return loc;
+    return result;
 }
 
-- (CGPoint)findFeatureByName:(NSString *)featureName
+- (CGRect)findFeatureByName:(NSString *)featureName
 {
     NSImage *feature = [self imageFromFileByName:featureName];
     return [self findFeature:feature];
@@ -174,7 +177,7 @@
 - (BOOL)hasFeature:(NSString *)featureName
 {
     NSImage *feature = [self imageFromFileByName:featureName];
-    CGPoint loc = [self findFeature:feature];
+    CGPoint loc = [self findFeature:feature].origin;
     return loc.x > 0 && loc.y > 0;
 }
 
