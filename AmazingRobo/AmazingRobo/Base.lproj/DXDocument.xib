@@ -6,6 +6,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="DXDocument">
             <connections>
+                <outlet property="fileNameView" destination="sA3-2I-r6y" id="Jlx-qL-3UY"/>
                 <outlet property="resultView" destination="qfT-XS-Gg4" id="eaS-a8-Oba"/>
                 <outlet property="screenShot" destination="4ey-CX-odh" id="iAB-8M-kgD"/>
                 <outlet property="window" destination="5" id="18"/>
@@ -15,14 +16,14 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" wantsToBeColor="NO" visibleAtLaunch="NO" animationBehavior="default" id="5" userLabel="Window">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="133" y="235" width="803" height="672"/>
+            <rect key="contentRect" x="133" y="235" width="794" height="699"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
             <view key="contentView" id="6">
-                <rect key="frame" x="0.0" y="0.0" width="803" height="672"/>
+                <rect key="frame" x="0.0" y="0.0" width="794" height="699"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8tP-JO-hXM">
-                        <rect key="frame" x="398" y="13" width="118" height="32"/>
+                        <rect key="frame" x="398" y="40" width="118" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="tap left-top" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="bf2-61-jtx">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -33,7 +34,7 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4NS-qg-2iq">
-                        <rect key="frame" x="632" y="13" width="118" height="32"/>
+                        <rect key="frame" x="632" y="40" width="118" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="send pan" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="68H-ce-Iyc">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -44,15 +45,15 @@
                         </connections>
                     </button>
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4ey-CX-odh" customClass="DXImageView">
-                        <rect key="frame" x="55" y="58" width="320" height="568"/>
+                        <rect key="frame" x="58" y="88" width="314" height="562"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageAlignment="topLeft" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="Yoc-Y8-2PV"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageAlignment="topLeft" imageScaling="proportionallyDown" id="Yoc-Y8-2PV"/>
                         <connections>
                             <outlet property="delegate" destination="-2" id="YOQ-d9-tRE"/>
                         </connections>
                     </imageView>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HFN-pB-bOv">
-                        <rect key="frame" x="44" y="13" width="118" height="32"/>
+                        <rect key="frame" x="44" y="40" width="118" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="tap menu" bezelStyle="rounded" image="menu" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zuJ-An-b3y">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -62,13 +63,13 @@
                             <action selector="tapMenuTapped:" target="-2" id="hoW-fF-NKA"/>
                         </connections>
                     </button>
-                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qfT-XS-Gg4" customClass="DXImageView">
-                        <rect key="frame" x="427" y="58" width="320" height="568"/>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qfT-XS-Gg4">
+                        <rect key="frame" x="427" y="85" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageAlignment="topLeft" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="ay0-IV-Zus"/>
                     </imageView>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LwZ-7v-AOP">
-                        <rect key="frame" x="162" y="13" width="118" height="32"/>
+                        <rect key="frame" x="162" y="40" width="118" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="tap buylist" bezelStyle="rounded" image="buylist" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Vl2-YC-gqa">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -79,7 +80,7 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c4Y-8m-WqR">
-                        <rect key="frame" x="280" y="13" width="118" height="32"/>
+                        <rect key="frame" x="280" y="40" width="118" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="tap hot dishes" bezelStyle="rounded" image="hotdish" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="buE-tQ-A56">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -90,7 +91,7 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eRm-S8-pF3">
-                        <rect key="frame" x="516" y="13" width="118" height="32"/>
+                        <rect key="frame" x="516" y="40" width="118" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="tap right-top" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Edd-iY-IVY">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -100,6 +101,26 @@
                             <action selector="tapRightTopButtonTapped:" target="-2" id="mJh-8O-c9B"/>
                         </connections>
                     </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T3y-cS-LWn">
+                        <rect key="frame" x="42" y="3" width="122" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="clip image" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="J3J-hy-v75">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="clipButtonTapped:" target="-2" id="m1d-x0-4Y3"/>
+                        </connections>
+                    </button>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sA3-2I-r6y">
+                        <rect key="frame" x="168" y="10" width="204" height="22"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="clip image file name" drawsBackground="YES" id="Ams-5s-03J">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                 </subviews>
             </view>
             <connections>

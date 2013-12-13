@@ -22,11 +22,13 @@
 - (IBAction)tapBuylistTapped:(id)sender;
 - (IBAction)tapHotDishesTapped:(id)sender;
 - (IBAction)tapRightTopButtonTapped:(id)sender;
+- (IBAction)clipButtonTapped:(id)sender;
 
 @property (strong,nonatomic) DXTestEngine *engine;
 
-@property (weak) IBOutlet NSImageView *screenShot;
+@property (weak) IBOutlet DXImageView *screenShot;
 @property (weak) IBOutlet NSImageView *resultView;
+@property (weak) IBOutlet NSTextField *fileNameView;
 
 @end
 
@@ -116,6 +118,17 @@
 
 - (IBAction)tapRightTopButtonTapped:(id)sender {
     [self.engine tapPoint:CGPointMake(290, 30)];
+}
+
+- (IBAction)clipButtonTapped:(id)sender {
+    NSImage *clipped = [self.screenShot getClippedImage];
+    self.resultView.image = clipped;
+    NSString *fileName = self.fileNameView.stringValue.length > 0 ? self.fileNameView.stringValue : [NSString stringWithFormat:@"%f",[NSDate date].timeIntervalSinceReferenceDate];
+    NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"AmazingRobo/features/%@",fileName]];
+    BOOL result = [self.screenShot saveClippedImageToPath:path];
+    if (result) {
+        NSLog(@"clipped image has been saved into %@",path);
+    }
 }
 
 #pragma mark - dx image view delegate
