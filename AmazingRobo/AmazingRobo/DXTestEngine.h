@@ -21,6 +21,9 @@
 @interface DXTestEngine : NSObject<GCDAsyncSocketDelegate>
 
 @property (weak,nonatomic) id<DXTestEngineDelegate> delegate;
+@property (strong,nonatomic,readonly) NSString *featurePath;
+@property (strong,nonatomic,readonly) NSString *rootPath;
+@property (strong,nonatomic,readonly) NSString *featureExtension;
 
 - (void)start;
 
@@ -31,5 +34,7 @@
 - (CGRect)findFeature:(NSImage *)feature;
 - (CGRect)findFeatureByName:(NSString *)featureName;
 - (BOOL)hasFeature:(NSString *)featureName;
+
+- (NSString *)featurePathWithName:(NSString *)name;
 
 @end

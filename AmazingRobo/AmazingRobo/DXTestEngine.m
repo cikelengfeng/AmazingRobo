@@ -34,6 +34,9 @@
     if (self) {
         // Add your subclass-specific initialization here.
         _serverSocket = [[GCDAsyncSocket alloc]initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
+        _rootPath = [NSHomeDirectory() stringByAppendingPathComponent:@"AmazingRobo"];
+        _featurePath = [_rootPath stringByAppendingPathComponent:@"features"];
+        _featureExtension = @"png";
     }
     return self;
 }
@@ -179,6 +182,11 @@
     NSImage *feature = [self imageFromFileByName:featureName];
     CGPoint loc = [self findFeature:feature].origin;
     return loc.x > 0 && loc.y > 0;
+}
+
+- (NSString *)featurePathWithName:(NSString *)name
+{
+    return [[self.featurePath stringByAppendingPathComponent:name] stringByAppendingPathExtension:self.featureExtension];
 }
 
 

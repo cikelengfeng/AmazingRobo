@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4230A76A185EF00C006D865F /* ARCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4230A769185EF00C006D865F /* ARCollectionView.m */; };
 		42362D29184C55AE00649DDD /* libopencv_imgproc.2.4.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 42362D28184C55AE00649DDD /* libopencv_imgproc.2.4.7.dylib */; };
 		42362D3A184C575100649DDD /* libopencv_core.2.4.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 42362D2C184C575100649DDD /* libopencv_core.2.4.7.dylib */; };
 		42362D47184C5EE400649DDD /* DXFeatureFinder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 42362D46184C5EE400649DDD /* DXFeatureFinder.mm */; };
 		42362D4A184C633B00649DDD /* NSImage+OpenCV.mm in Sources */ = {isa = PBXBuildFile; fileRef = 42362D49184C633B00649DDD /* NSImage+OpenCV.mm */; };
-		423AA876184D962B00E3F9DC /* NSImageView+AddMask.m in Sources */ = {isa = PBXBuildFile; fileRef = 423AA875184D962B00E3F9DC /* NSImageView+AddMask.m */; };
 		423AA87F184DDB2700E3F9DC /* DXImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 423AA87E184DDB2700E3F9DC /* DXImageView.m */; };
 		425176281844816300C3D08D /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 425176251844816300C3D08D /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		42517630184481E000C3D08D /* DXTouchCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 4251762F184481E000C3D08D /* DXTouchCommand.m */; };
@@ -62,13 +62,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4230A768185EF00C006D865F /* ARCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCollectionView.h; sourceTree = "<group>"; };
+		4230A769185EF00C006D865F /* ARCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCollectionView.m; sourceTree = "<group>"; };
 		42362D28184C55AE00649DDD /* libopencv_imgproc.2.4.7.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgproc.2.4.7.dylib; path = ../../../../../usr/local/lib/libopencv_imgproc.2.4.7.dylib; sourceTree = "<group>"; };
 		42362D2C184C575100649DDD /* libopencv_core.2.4.7.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_core.2.4.7.dylib; path = ../../../../../usr/local/lib/libopencv_core.2.4.7.dylib; sourceTree = "<group>"; };
 		42362D46184C5EE400649DDD /* DXFeatureFinder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DXFeatureFinder.mm; sourceTree = "<group>"; };
 		42362D48184C633B00649DDD /* NSImage+OpenCV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+OpenCV.h"; sourceTree = "<group>"; };
 		42362D49184C633B00649DDD /* NSImage+OpenCV.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSImage+OpenCV.mm"; sourceTree = "<group>"; };
-		423AA874184D962B00E3F9DC /* NSImageView+AddMask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImageView+AddMask.h"; sourceTree = "<group>"; };
-		423AA875184D962B00E3F9DC /* NSImageView+AddMask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImageView+AddMask.m"; sourceTree = "<group>"; };
 		423AA87D184DDB2700E3F9DC /* DXImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXImageView.h; sourceTree = "<group>"; };
 		423AA87E184DDB2700E3F9DC /* DXImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXImageView.m; sourceTree = "<group>"; };
 		425176241844816300C3D08D /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
@@ -270,8 +270,6 @@
 				42362D46184C5EE400649DDD /* DXFeatureFinder.mm */,
 				42362D48184C633B00649DDD /* NSImage+OpenCV.h */,
 				42362D49184C633B00649DDD /* NSImage+OpenCV.mm */,
-				423AA874184D962B00E3F9DC /* NSImageView+AddMask.h */,
-				423AA875184D962B00E3F9DC /* NSImageView+AddMask.m */,
 			);
 			path = FeatureFinder;
 			sourceTree = "<group>";
@@ -345,6 +343,8 @@
 				42A29B1918559B4300B835BE /* DXTestEngine.m */,
 				423AA87D184DDB2700E3F9DC /* DXImageView.h */,
 				423AA87E184DDB2700E3F9DC /* DXImageView.m */,
+				4230A768185EF00C006D865F /* ARCollectionView.h */,
+				4230A769185EF00C006D865F /* ARCollectionView.m */,
 				42C0FE0A183B4A2F004094FD /* MainMenu.xib */,
 				42C0FE0D183B4A2F004094FD /* Images.xcassets */,
 				42C0FDF9183B4A2F004094FD /* Supporting Files */,
@@ -426,7 +426,7 @@
 		42C0FDE7183B4A2F004094FD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = DX;
+				CLASSPREFIX = AR;
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = DeanXu;
 				TargetAttributes = {
@@ -499,9 +499,9 @@
 				427CF2F3185027E200B40A9A /* AsyncUdpSocket.m in Sources */,
 				427CF312185027E200B40A9A /* DDTTYLogger.m in Sources */,
 				4271FA36184739F800EF87D0 /* Base64.m in Sources */,
-				423AA876184D962B00E3F9DC /* NSImageView+AddMask.m in Sources */,
 				42362D47184C5EE400649DDD /* DXFeatureFinder.mm in Sources */,
 				427CF310185027E200B40A9A /* DDFileLogger.m in Sources */,
+				4230A76A185EF00C006D865F /* ARCollectionView.m in Sources */,
 				42A29B141855855100B835BE /* DXTestSuite.m in Sources */,
 				42C0FE06183B4A2F004094FD /* DXDocument.m in Sources */,
 				42C0FDFF183B4A2F004094FD /* main.m in Sources */,

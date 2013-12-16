@@ -9,7 +9,10 @@
 #import <Cocoa/Cocoa.h>
 #import "DXImageView.h"
 #import "DXTestEngine.h"
+#import "ARCollectionView.h"
 
-@interface DXDocument : NSDocument<DXImageViewDelegate,DXTestEngineDelegate>
+@interface DXDocument : NSDocument<DXTestEngineDelegate,NSCollectionViewDelegate,ARKeyboardEventResponder>
+
+@property (strong,nonatomic,readonly) NSMutableArray *features;
 
 @end

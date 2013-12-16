@@ -6,9 +6,9 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="DXDocument">
             <connections>
+                <outlet property="fileCollectionView" destination="Gck-nC-s4i" id="JhF-SX-HEw"/>
                 <outlet property="fileNameView" destination="sA3-2I-r6y" id="Jlx-qL-3UY"/>
                 <outlet property="findResultView" destination="1BQ-De-hEj" id="Zw9-LW-sEB"/>
-                <outlet property="resultView" destination="qfT-XS-Gg4" id="eaS-a8-Oba"/>
                 <outlet property="screenShot" destination="4ey-CX-odh" id="iAB-8M-kgD"/>
                 <outlet property="window" destination="5" id="18"/>
             </connections>
@@ -49,9 +49,6 @@
                         <rect key="frame" x="58" y="88" width="314" height="562"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageAlignment="topLeft" imageScaling="proportionallyDown" id="Yoc-Y8-2PV"/>
-                        <connections>
-                            <outlet property="delegate" destination="-2" id="YOQ-d9-tRE"/>
-                        </connections>
                     </imageView>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HFN-pB-bOv">
                         <rect key="frame" x="44" y="40" width="118" height="32"/>
@@ -64,11 +61,6 @@
                             <action selector="tapMenuTapped:" target="-2" id="hoW-fF-NKA"/>
                         </connections>
                     </button>
-                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qfT-XS-Gg4">
-                        <rect key="frame" x="430" y="88" width="314" height="562"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageAlignment="topLeft" imageScaling="proportionallyDown" id="ay0-IV-Zus"/>
-                    </imageView>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LwZ-7v-AOP">
                         <rect key="frame" x="162" y="40" width="118" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -123,6 +115,7 @@
                         </textFieldCell>
                         <connections>
                             <action selector="fileNameInputComplete:" target="-2" id="6Uw-HU-ZLg"/>
+                            <binding destination="hNt-OZ-4v1" name="value" keyPath="selection.absoluteString.lastPathComponent" id="xse-uF-t3F"/>
                         </connections>
                     </textField>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nL2-qi-OBb">
@@ -145,6 +138,36 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
+                    <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rBK-Ku-Bg7">
+                        <rect key="frame" x="404" y="88" width="340" height="562"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <clipView key="contentView" ambiguous="YES" misplaced="YES" id="6BN-Zg-ZNA">
+                            <rect key="frame" x="1" y="1" width="338" height="560"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <collectionView ambiguous="YES" selectable="YES" maxNumberOfColumns="4" id="Gck-nC-s4i" customClass="ARCollectionView">
+                                    <rect key="frame" x="0.0" y="0.0" width="338" height="560"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <connections>
+                                        <binding destination="hNt-OZ-4v1" name="content" keyPath="arrangedObjects" id="aIz-vI-02T"/>
+                                        <binding destination="hNt-OZ-4v1" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="aIz-vI-02T" id="uah-wz-Lk4"/>
+                                        <outlet property="delegate" destination="-2" id="khJ-1T-Aos"/>
+                                        <outlet property="itemPrototype" destination="3fh-G0-Fcg" id="mmz-1d-YWf"/>
+                                        <outlet property="keyEventResponder" destination="-2" id="iZ6-Mi-Hsb"/>
+                                    </connections>
+                                </collectionView>
+                            </subviews>
+                        </clipView>
+                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="4gT-Uk-WsM">
+                            <rect key="frame" x="1" y="144" width="233" height="15"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="v8Y-0M-5Qx">
+                            <rect key="frame" x="234" y="1" width="15" height="143"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                    </scrollView>
                 </subviews>
             </view>
             <connections>
@@ -152,6 +175,45 @@
             </connections>
         </window>
         <customObject id="-3" userLabel="Application"/>
+        <collectionViewItem id="3fh-G0-Fcg">
+            <connections>
+                <outlet property="view" destination="Vaf-lz-FwU" id="drN-iJ-mNw"/>
+            </connections>
+        </collectionViewItem>
+        <view id="Vaf-lz-FwU">
+            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Dn-KB-MWG">
+                    <rect key="frame" x="-2" y="5" width="104" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="gPU-3P-7WO">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <binding destination="3fh-G0-Fcg" name="value" keyPath="representedObject.absoluteString.lastPathComponent" id="RaY-f2-Mak"/>
+                    </connections>
+                </textField>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lOd-gd-Jjr">
+                    <rect key="frame" x="0.0" y="20" width="100" height="80"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="Wd5-rA-Ppa"/>
+                    <connections>
+                        <binding destination="3fh-G0-Fcg" name="valueURL" keyPath="representedObject" id="qum-VP-vs7"/>
+                    </connections>
+                </imageView>
+            </subviews>
+            <connections>
+                <binding destination="3fh-G0-Fcg" name="toolTip" keyPath="representedObject.absoluteString.lastPathComponent" id="b1c-wr-3KQ"/>
+            </connections>
+        </view>
+        <arrayController id="hNt-OZ-4v1">
+            <connections>
+                <binding destination="-2" name="contentArray" keyPath="features" id="FyI-Rs-NEw"/>
+            </connections>
+        </arrayController>
     </objects>
     <resources>
         <image name="buylist" width="22" height="18"/>

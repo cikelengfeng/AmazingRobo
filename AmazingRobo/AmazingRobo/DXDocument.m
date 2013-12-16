@@ -10,7 +10,6 @@
 #import "DXTouchCommand.h"
 #import "Base64.h"
 #import "DXFeatureFinder.h"
-#import "NSImageView+AddMask.h"
 #import "DXTestEngine.h"
 
 @interface DXDocument ()
@@ -27,11 +26,12 @@
 - (IBAction)fileNameInputComplete:(id)sender;
 
 @property (strong,nonatomic) DXTestEngine *engine;
+@property (strong,nonatomic) NSMutableArray *features;
 
 @property (weak) IBOutlet DXImageView *screenShot;
-@property (weak) IBOutlet NSImageView *resultView;
 @property (weak) IBOutlet NSTextField *fileNameView;
 @property (weak) IBOutlet NSTextField *findResultView;
+@property (weak) IBOutlet NSCollectionView *fileCollectionView;
 
 @end
 
@@ -60,6 +60,7 @@
     // Add any code here that needs to be executed once the windowController has loaded the document's window.
     self.engine.delegate = self;
     [self.engine start];
+    [self loadFeatures];
 }
 
 + (BOOL)autosavesInPlace
@@ -124,35 +125,24 @@
 }
 
 - (IBAction)clipButtonTapped:(id)sender {
-    NSImage *clipped = [self.screenShot getClippedImage];
-    self.resultView.image = clipped;
-    NSString *fileName = self.fileNameView.stringValue.length > 0 ? self.fileNameView.stringValue : [NSString stringWithFormat:@"%f",[NSDate date].timeIntervalSinceReferenceDate];
+    NSString *fileName = self.fileNameView.stringValue.length > 0 ? self.fileNameView.stringValue.stringByDeletingPathExtension : [NSString stringWithFormat:@"%f",[NSDate date].timeIntervalSinceReferenceDate];
     NSString *path = [[[[NSHomeDirectory() stringByAppendingPathComponent:@"AmazingRobo"] stringByAppendingPathComponent:@"features"] stringByAppendingPathComponent:fileName] stringByAppendingPathExtension:@"png"];
     BOOL result = [self.screenShot saveClippedImageToPath:path];
     if (result) {
         NSLog(@"clipped image has been saved into %@",path);
+        [self loadFeatures];
     }
 }
 
 - (IBAction)findClippedButtonTapped:(id)sender {
-    CGRect result = [self.engine findFeatureByName:self.fileNameView.stringValue];
+    CGRect result = [self.engine findFeatureByName:self.fileNameView.stringValue.stringByDeletingPathExtension];
     self.findResultView.stringValue = NSStringFromRect(result);
     CGRect drawMaskRect = CGRectMake(result.origin.x, self.screenShot.bounds.size.height - result.origin.y - result.size.height, result.size.width, result.size.height);
-    NSLog(@"drawMaskRect %@",NSStringFromRect(drawMaskRect));
     [self.screenShot setRectangleMask:drawMaskRect];
 }
 
 - (IBAction)fileNameInputComplete:(id)sender {
     [self findClippedButtonTapped:nil];
-}
-
-#pragma mark - dx image view delegate
-
-- (void)dxImageView:(DXImageView *)view mouseDown:(NSPoint)point
-{
-    CGSize s = view.bounds.size;
-    CGPoint p = CGPointMake(point.x, s.height - point.y);
-    [self.engine tapPoint:NSPointToCGPoint(p)];
 }
 
 #pragma mark - test engine delegate
@@ -163,7 +153,68 @@
 
 - (void)testEngine:(DXTestEngine *)engine hasNewMatchResult:(NSImage *)result
 {
-    self.resultView.image = result;
+}
+
+#pragma mark -  file operations
+- (void)loadFeatures
+{
+    NSURL *url = [NSURL fileURLWithPath:self.engine.featurePath];
+    NSError *error = nil;
+    NSArray *properties = @[ NSURLLocalizedNameKey,
+                           NSURLCreationDateKey, NSURLLocalizedTypeDescriptionKey];
+    
+    NSArray *array = [[NSFileManager defaultManager]
+                      contentsOfDirectoryAtURL:url
+                      includingPropertiesForKeys:properties
+                      options:(NSDirectoryEnumerationSkipsHiddenFiles | NSDirectoryEnumerationSkipsPackageDescendants | NSDirectoryEnumerationSkipsSubdirectoryDescendants)
+                      error:&error];
+    if (array == nil) {
+        // Handle the error
+        return;
+    }
+    self.features = [NSMutableArray arrayWithArray:array];
+}
+
+- (void)deleteSelectedFile
+{
+    NSInteger selectionIndex = [self.fileCollectionView.selectionIndexes firstIndex];
+    NSURL *deletion = self.features[selectionIndex];
+    [self.features removeObjectAtIndex:selectionIndex];
+    NSError *err = nil;
+    BOOL result = [[NSFileManager defaultManager] removeItemAtURL:deletion error:&err];
+    if (!result) {
+        NSLog(@"delete file %@ failed : %@",deletion,err);
+    }
+    [self loadFeatures];
+}
+
+- (void)copySelectedFileName
+{
+    NSInteger selectionIndex = [self.fileCollectionView.selectionIndexes firstIndex];
+    NSURL *selection = self.features[selectionIndex];
+    NSString *fileName = selection.absoluteString.lastPathComponent.stringByDeletingPathExtension;
+}
+
+#pragma mark - keyboard event responder
+- (void)keyboardDeleteEventComingToResponder:(NSResponder *)responder
+{
+    if (responder == self.fileCollectionView) {
+        [self deleteSelectedFile];
+    }
+}
+
+- (void)keyboardEnterEventComingToResponder:(NSResponder *)responder
+{
+    if (responder == self.fileCollectionView) {
+        [self findClippedButtonTapped:nil];
+    }
+}
+
+-(void)keyboardCopyEventComingToResponder:(NSResponder *)responder
+{
+    if (responder == self.fileCollectionView) {
+        [self copySelectedFileName];
+    }
 }
 
 @end
