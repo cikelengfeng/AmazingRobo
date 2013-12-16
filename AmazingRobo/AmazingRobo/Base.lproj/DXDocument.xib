@@ -115,7 +115,11 @@
                         </textFieldCell>
                         <connections>
                             <action selector="fileNameInputComplete:" target="-2" id="6Uw-HU-ZLg"/>
-                            <binding destination="hNt-OZ-4v1" name="value" keyPath="selection.absoluteString.lastPathComponent" id="xse-uF-t3F"/>
+                            <binding destination="hNt-OZ-4v1" name="value" keyPath="selection.absoluteString.lastPathComponent" id="tvO-uO-tzI">
+                                <dictionary key="options">
+                                    <bool key="NSConditionallySetsEditable" value="NO"/>
+                                </dictionary>
+                            </binding>
                         </connections>
                     </textField>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nL2-qi-OBb">
@@ -175,12 +179,12 @@
             </connections>
         </window>
         <customObject id="-3" userLabel="Application"/>
-        <collectionViewItem id="3fh-G0-Fcg">
+        <collectionViewItem id="3fh-G0-Fcg" customClass="ARCollectionItem">
             <connections>
                 <outlet property="view" destination="Vaf-lz-FwU" id="drN-iJ-mNw"/>
             </connections>
         </collectionViewItem>
-        <view id="Vaf-lz-FwU">
+        <view id="Vaf-lz-FwU" customClass="ARCollectionItemView">
             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
@@ -209,7 +213,7 @@
                 <binding destination="3fh-G0-Fcg" name="toolTip" keyPath="representedObject.absoluteString.lastPathComponent" id="b1c-wr-3KQ"/>
             </connections>
         </view>
-        <arrayController id="hNt-OZ-4v1">
+        <arrayController preservesSelection="NO" avoidsEmptySelection="NO" id="hNt-OZ-4v1">
             <connections>
                 <binding destination="-2" name="contentArray" keyPath="features" id="FyI-Rs-NEw"/>
             </connections>

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4230A76A185EF00C006D865F /* ARCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4230A769185EF00C006D865F /* ARCollectionView.m */; };
+		4230A76D185F0626006D865F /* ARCollectionItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4230A76C185F0626006D865F /* ARCollectionItemView.m */; };
+		4230A770185F06B6006D865F /* ARCollectionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4230A76F185F06B6006D865F /* ARCollectionItem.m */; };
 		42362D29184C55AE00649DDD /* libopencv_imgproc.2.4.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 42362D28184C55AE00649DDD /* libopencv_imgproc.2.4.7.dylib */; };
 		42362D3A184C575100649DDD /* libopencv_core.2.4.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 42362D2C184C575100649DDD /* libopencv_core.2.4.7.dylib */; };
 		42362D47184C5EE400649DDD /* DXFeatureFinder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 42362D46184C5EE400649DDD /* DXFeatureFinder.mm */; };
@@ -64,6 +66,10 @@
 /* Begin PBXFileReference section */
 		4230A768185EF00C006D865F /* ARCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCollectionView.h; sourceTree = "<group>"; };
 		4230A769185EF00C006D865F /* ARCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCollectionView.m; sourceTree = "<group>"; };
+		4230A76B185F0626006D865F /* ARCollectionItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCollectionItemView.h; sourceTree = "<group>"; };
+		4230A76C185F0626006D865F /* ARCollectionItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCollectionItemView.m; sourceTree = "<group>"; };
+		4230A76E185F06B6006D865F /* ARCollectionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCollectionItem.h; sourceTree = "<group>"; };
+		4230A76F185F06B6006D865F /* ARCollectionItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCollectionItem.m; sourceTree = "<group>"; };
 		42362D28184C55AE00649DDD /* libopencv_imgproc.2.4.7.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgproc.2.4.7.dylib; path = ../../../../../usr/local/lib/libopencv_imgproc.2.4.7.dylib; sourceTree = "<group>"; };
 		42362D2C184C575100649DDD /* libopencv_core.2.4.7.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_core.2.4.7.dylib; path = ../../../../../usr/local/lib/libopencv_core.2.4.7.dylib; sourceTree = "<group>"; };
 		42362D46184C5EE400649DDD /* DXFeatureFinder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DXFeatureFinder.mm; sourceTree = "<group>"; };
@@ -345,6 +351,10 @@
 				423AA87E184DDB2700E3F9DC /* DXImageView.m */,
 				4230A768185EF00C006D865F /* ARCollectionView.h */,
 				4230A769185EF00C006D865F /* ARCollectionView.m */,
+				4230A76B185F0626006D865F /* ARCollectionItemView.h */,
+				4230A76C185F0626006D865F /* ARCollectionItemView.m */,
+				4230A76E185F06B6006D865F /* ARCollectionItem.h */,
+				4230A76F185F06B6006D865F /* ARCollectionItem.m */,
 				42C0FE0A183B4A2F004094FD /* MainMenu.xib */,
 				42C0FE0D183B4A2F004094FD /* Images.xcassets */,
 				42C0FDF9183B4A2F004094FD /* Supporting Files */,
@@ -500,6 +510,7 @@
 				427CF312185027E200B40A9A /* DDTTYLogger.m in Sources */,
 				4271FA36184739F800EF87D0 /* Base64.m in Sources */,
 				42362D47184C5EE400649DDD /* DXFeatureFinder.mm in Sources */,
+				4230A770185F06B6006D865F /* ARCollectionItem.m in Sources */,
 				427CF310185027E200B40A9A /* DDFileLogger.m in Sources */,
 				4230A76A185EF00C006D865F /* ARCollectionView.m in Sources */,
 				42A29B141855855100B835BE /* DXTestSuite.m in Sources */,
@@ -507,6 +518,7 @@
 				42C0FDFF183B4A2F004094FD /* main.m in Sources */,
 				42A29B171855968300B835BE /* XcfHomeTestSuite.m in Sources */,
 				42517630184481E000C3D08D /* DXTouchCommand.m in Sources */,
+				4230A76D185F0626006D865F /* ARCollectionItemView.m in Sources */,
 				423AA87F184DDB2700E3F9DC /* DXImageView.m in Sources */,
 				427CF29B185027E200B40A9A /* GCDAsyncUdpSocket.m in Sources */,
 				42A29B1A18559B4300B835BE /* DXTestEngine.m in Sources */,
