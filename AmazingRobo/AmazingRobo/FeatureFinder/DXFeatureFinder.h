@@ -10,6 +10,8 @@
 
 @interface DXFeatureFinder : NSObject
 
++ (CGRect)findFeature:(NSImage *)feature inImage:(NSImage *)image min:(double *)min max:(double *)max  method:(int *)method;
+
 + (CGRect)findFeature:(NSImage *)feature inImage:(NSImage *)image;
 
 + (NSImage *)resultFromFeature:(NSImage *)feature inImage:(NSImage *)image;

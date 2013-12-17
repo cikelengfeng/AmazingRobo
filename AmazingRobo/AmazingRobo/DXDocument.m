@@ -14,13 +14,6 @@
 
 @interface DXDocument ()
 
-
-- (IBAction)tapLeftTopButtonTapped:(NSButton *)sender;
-- (IBAction)panButtonTapped:(NSButton *)sender;
-- (IBAction)tapMenuTapped:(NSButton *)sender;
-- (IBAction)tapBuylistTapped:(id)sender;
-- (IBAction)tapHotDishesTapped:(id)sender;
-- (IBAction)tapRightTopButtonTapped:(id)sender;
 - (IBAction)clipButtonTapped:(id)sender;
 - (IBAction)findClippedButtonTapped:(id)sender;
 - (IBAction)fileNameInputComplete:(id)sender;
@@ -31,6 +24,7 @@
 @property (weak) IBOutlet DXImageView *screenShot;
 @property (weak) IBOutlet NSTextField *fileNameView;
 @property (weak) IBOutlet NSTextField *findResultView;
+@property (weak) IBOutlet NSTextField *matchingRateView;
 @property (weak) IBOutlet NSCollectionView *fileCollectionView;
 
 @end
@@ -87,42 +81,6 @@
     return YES;
 }
 
-- (IBAction)tapLeftTopButtonTapped:(NSButton *)sender {
-    [self.engine tapPoint:CGPointMake(30, 30)];
-}
-
-- (IBAction)panButtonTapped:(id)sender {
-    static BOOL flag = YES;
-    NSError *err = nil;
-    static DXTouchCommand *testCommand1,*testCommand2;
-    testCommand1 = [[DXTouchCommand alloc]initWithType:CommandPan beganPoints:@[touchPointMake(30, 30)] endedPoints:@[touchPointMake(290, 30)] duration:0.3];
-    testCommand2 = [[DXTouchCommand alloc]initWithType:CommandPan beganPoints:@[touchPointMake(290, 30)] endedPoints:@[touchPointMake(30, 30)] duration:0.3];
-    if (flag) {
-        [self.engine sendTouchCommand:testCommand1];//pan from (30,30) to (290,30)
-    }else {
-        [self.engine sendTouchCommand:testCommand2];//pan from (290,30) to (30,30)
-    }
-    flag = !flag;
-    if (err) {
-        NSLog(@"error occured : %@",err);
-    }
-}
-
-- (IBAction)tapMenuTapped:(id)sender {
-    [self.engine tapFeature:@"menu"];
-}
-
-- (IBAction)tapBuylistTapped:(id)sender {
-    [self.engine tapFeature:@"buylist"];
-}
-
-- (IBAction)tapHotDishesTapped:(id)sender {
-    [self.engine tapFeature:@"hotdish"];
-}
-
-- (IBAction)tapRightTopButtonTapped:(id)sender {
-    [self.engine tapPoint:CGPointMake(290, 30)];
-}
 
 - (IBAction)clipButtonTapped:(id)sender {
     NSString *fileName = self.fileNameView.stringValue.length > 0 ? self.fileNameView.stringValue.stringByDeletingPathExtension : [NSString stringWithFormat:@"%f",[NSDate date].timeIntervalSinceReferenceDate];
@@ -136,7 +94,7 @@
 
 - (IBAction)findClippedButtonTapped:(id)sender {
     CGRect result = [self.engine findFeatureByName:self.fileNameView.stringValue.stringByDeletingPathExtension];
-    self.findResultView.stringValue = NSStringFromRect(result);
+    self.findResultView.stringValue = NSStringFromPoint(result.origin);
     CGRect drawMaskRect = CGRectMake(result.origin.x, self.screenShot.bounds.size.height - result.origin.y - result.size.height, result.size.width, result.size.height);
     [self.screenShot setRectangleMask:drawMaskRect];
 }
@@ -151,8 +109,9 @@
     self.screenShot.image = screenshot;
 }
 
-- (void)testEngine:(DXTestEngine *)engine hasNewMatchResult:(NSImage *)result
+- (void)testEngine:(DXTestEngine *)engine hasNewMatchResult:(CGRect)result min:(double)min max:(double)max matchMethod:(int)method
 {
+    self.matchingRateView.stringValue = @(max).description;
 }
 
 #pragma mark -  file operations
@@ -193,6 +152,8 @@
     NSInteger selectionIndex = [self.fileCollectionView.selectionIndexes firstIndex];
     NSURL *selection = self.features[selectionIndex];
     NSString *fileName = selection.absoluteString.lastPathComponent.stringByDeletingPathExtension;
+    [[NSPasteboard generalPasteboard] declareTypes:@[NSStringPboardType] owner:NULL];
+    [[NSPasteboard generalPasteboard] setString:fileName forType:NSStringPboardType];
 }
 
 #pragma mark - keyboard event responder

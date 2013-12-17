@@ -14,7 +14,7 @@
 @protocol DXTestEngineDelegate <NSObject>
 
 - (void)testEngine:(DXTestEngine *)engine hasNewScreenShot:(NSImage *)screenshot;
-- (void)testEngine:(DXTestEngine *)engine hasNewMatchResult:(NSImage *)result;
+- (void)testEngine:(DXTestEngine *)engine hasNewMatchResult:(CGRect)result min:(double)min max:(double)max matchMethod:(int)method;
 
 @end
 

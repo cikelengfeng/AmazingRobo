@@ -161,11 +161,12 @@
 
 - (CGRect)findFeature:(NSImage *)feature
 {
-    CGRect result = [DXFeatureFinder findFeature:feature inImage:self.screenShot];
+    double min,max;
+    int method;
+    CGRect result = [DXFeatureFinder findFeature:feature inImage:self.screenShot min:&min max:&max method:&method];
 #ifdef DEBUG
-    if ([self.delegate respondsToSelector:@selector(testEngine:hasNewScreenShot:)]) {
-        NSImage *result = [DXFeatureFinder resultFromFeature:feature inImage:self.screenShot];
-        [self.delegate testEngine:self hasNewMatchResult:result];
+    if ([self.delegate respondsToSelector:@selector(testEngine:hasNewMatchResult:min:max:matchMethod:)]) {
+        [self.delegate testEngine:self hasNewMatchResult:result min:min max:max matchMethod:method];
     }
 #endif
     return result;

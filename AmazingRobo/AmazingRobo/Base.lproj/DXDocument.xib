@@ -9,6 +9,7 @@
                 <outlet property="fileCollectionView" destination="Gck-nC-s4i" id="JhF-SX-HEw"/>
                 <outlet property="fileNameView" destination="sA3-2I-r6y" id="Jlx-qL-3UY"/>
                 <outlet property="findResultView" destination="1BQ-De-hEj" id="Zw9-LW-sEB"/>
+                <outlet property="matchingRateView" destination="Oew-M3-XwQ" id="UfH-QO-mRz"/>
                 <outlet property="screenShot" destination="4ey-CX-odh" id="iAB-8M-kgD"/>
                 <outlet property="window" destination="5" id="18"/>
             </connections>
@@ -23,79 +24,13 @@
                 <rect key="frame" x="0.0" y="0.0" width="794" height="699"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8tP-JO-hXM">
-                        <rect key="frame" x="398" y="40" width="118" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="tap left-top" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="bf2-61-jtx">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="tapLeftTopButtonTapped:" target="-2" id="GrX-3k-Y9N"/>
-                        </connections>
-                    </button>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4NS-qg-2iq">
-                        <rect key="frame" x="632" y="40" width="118" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="send pan" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="68H-ce-Iyc">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="panButtonTapped:" target="-2" id="ScF-ZF-QFD"/>
-                        </connections>
-                    </button>
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4ey-CX-odh" customClass="DXImageView">
                         <rect key="frame" x="58" y="88" width="314" height="562"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageAlignment="topLeft" imageScaling="proportionallyDown" id="Yoc-Y8-2PV"/>
                     </imageView>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HFN-pB-bOv">
-                        <rect key="frame" x="44" y="40" width="118" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="tap menu" bezelStyle="rounded" image="menu" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zuJ-An-b3y">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="tapMenuTapped:" target="-2" id="hoW-fF-NKA"/>
-                        </connections>
-                    </button>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LwZ-7v-AOP">
-                        <rect key="frame" x="162" y="40" width="118" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="tap buylist" bezelStyle="rounded" image="buylist" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Vl2-YC-gqa">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="tapBuylistTapped:" target="-2" id="8vy-oa-iVm"/>
-                        </connections>
-                    </button>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c4Y-8m-WqR">
-                        <rect key="frame" x="280" y="40" width="118" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="tap hot dishes" bezelStyle="rounded" image="hotdish" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="buE-tQ-A56">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="tapHotDishesTapped:" target="-2" id="Uus-ma-A25"/>
-                        </connections>
-                    </button>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eRm-S8-pF3">
-                        <rect key="frame" x="516" y="40" width="118" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="tap right-top" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Edd-iY-IVY">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="tapRightTopButtonTapped:" target="-2" id="mJh-8O-c9B"/>
-                        </connections>
-                    </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T3y-cS-LWn">
-                        <rect key="frame" x="42" y="3" width="122" height="32"/>
+                        <rect key="frame" x="42" y="51" width="122" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="clip image" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="J3J-hy-v75">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -106,7 +41,7 @@
                         </connections>
                     </button>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sA3-2I-r6y">
-                        <rect key="frame" x="168" y="10" width="204" height="22"/>
+                        <rect key="frame" x="168" y="58" width="204" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" state="on" borderStyle="bezel" placeholderString="clip image file name" drawsBackground="YES" id="Ams-5s-03J">
                             <font key="font" metaFont="system"/>
@@ -123,7 +58,7 @@
                         </connections>
                     </textField>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nL2-qi-OBb">
-                        <rect key="frame" x="374" y="4" width="122" height="32"/>
+                        <rect key="frame" x="374" y="52" width="122" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="find clipped" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="T7F-B0-qJw">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -133,8 +68,8 @@
                             <action selector="findClippedButtonTapped:" target="-2" id="nxD-hM-yLu"/>
                         </connections>
                     </button>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1BQ-De-hEj">
-                        <rect key="frame" x="503" y="9" width="243" height="23"/>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1BQ-De-hEj" userLabel="match point label">
+                        <rect key="frame" x="584" y="57" width="162" height="23"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="5n3-n6-Us4">
                             <font key="font" metaFont="system"/>
@@ -172,6 +107,33 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oew-M3-XwQ" userLabel="matching rate label">
+                        <rect key="frame" x="584" y="26" width="162" height="23"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="h8X-uS-6Af">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cQy-1b-5tP" userLabel="match point label">
+                        <rect key="frame" x="496" y="56" width="84" height="23"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="match point" id="2yB-k4-AKK">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z65-op-BVi" userLabel="match point label">
+                        <rect key="frame" x="496" y="26" width="84" height="23"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="match rate" id="fVE-ME-kjW">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                 </subviews>
             </view>
             <connections>
@@ -219,9 +181,4 @@
             </connections>
         </arrayController>
     </objects>
-    <resources>
-        <image name="buylist" width="22" height="18"/>
-        <image name="hotdish" width="51" height="47"/>
-        <image name="menu" width="21" height="15"/>
-    </resources>
 </document>

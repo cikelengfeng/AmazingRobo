@@ -98,7 +98,8 @@
                                               +------------------------+
   
   */
-    CGRect rectInImage = CGRectMake(_clipRect.origin.x * 2, (self.bounds.size.height - _clipRect.origin.y - _clipRect.size.height)*2, _clipRect.size.width*2, _clipRect.size.height*2);
+    NSInteger scaling = 2;
+    CGRect rectInImage = CGRectMake(_clipRect.origin.x * scaling, (self.bounds.size.height - _clipRect.origin.y - _clipRect.size.height)*scaling, _clipRect.size.width*scaling, _clipRect.size.height*scaling);
     CGImageRef cgOriginImg = [self.image CGImageForProposedRect:nil context:[NSGraphicsContext currentContext] hints:nil];
     CGImageRef cgClippedImg = CGImageCreateWithImageInRect(cgOriginImg,rectInImage);
     NSBitmapImageRep *image = [[NSBitmapImageRep alloc]initWithCGImage:cgClippedImg];
@@ -117,7 +118,7 @@
     NSError *err = nil;
     BOOL result = [pngData writeToFile:path options:0 error:&err];
     if (!result) {
-        NSLog(@"saving file failed, error ");
+        NSLog(@"saving file failed, error %@",err);
     }
     return result;
 }
