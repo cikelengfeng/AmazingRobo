@@ -17,6 +17,7 @@
 - (IBAction)clipButtonTapped:(id)sender;
 - (IBAction)findClippedButtonTapped:(id)sender;
 - (IBAction)fileNameInputComplete:(id)sender;
+- (IBAction)tapClippedButtonTapped:(id)sender;
 
 @property (strong,nonatomic) DXTestEngine *engine;
 @property (strong,nonatomic) NSMutableArray *features;
@@ -100,6 +101,11 @@
 }
 
 - (IBAction)fileNameInputComplete:(id)sender {
+    [self findClippedButtonTapped:nil];
+}
+
+- (IBAction)tapClippedButtonTapped:(id)sender {
+    [self.engine tapFeature:self.fileNameView.stringValue.stringByDeletingPathExtension];
     [self findClippedButtonTapped:nil];
 }
 
