@@ -51,10 +51,4 @@
     [self.keyEventResponder keyboardDeleteEventComingToResponder:self];
 }
 
-- (void)setSelectionIndexes:(NSIndexSet *)indexes
-{
-    [super setSelectionIndexes:indexes];
-    NSLog(@"selected %@",indexes);
-}
-
 @end
