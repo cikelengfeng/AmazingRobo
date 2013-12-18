@@ -12,7 +12,7 @@
  * 用于显示图片和鼠标截图的工具类
  * @note 不要为该类设置任何边框
  **/
-@interface DXImageView : NSImageView
+@interface ARImageView : NSImageView
 
 @property (assign,nonatomic) NSRect rectangleMask;
 

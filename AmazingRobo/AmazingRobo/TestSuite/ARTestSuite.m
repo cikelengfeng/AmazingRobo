@@ -6,10 +6,23 @@
 //  Copyright (c) 2013年 DeanXu. All rights reserved.
 //
 
-#import "DXTestSuite.h"
+#import "ARTestSuite.h"
 
-@implementation DXTestSuite
+@interface ARTestSuite ()
 
+@property (strong,nonatomic) ARTestEngine *engine;
 
+@end
+
+@implementation ARTestSuite
+
+- (instancetype)initWithTestEngine:(ARTestEngine *)engine
+{
+    self = [super init];
+    if (self) {
+        _engine = engine;
+    }
+    return self;
+}
 
 @end

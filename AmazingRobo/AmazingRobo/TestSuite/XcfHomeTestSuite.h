@@ -6,8 +6,14 @@
 //  Copyright (c) 2013年 DeanXu. All rights reserved.
 //
 
-#import "DXTestSuite.h"
+#import "ARTestSuite.h"
 
-@interface XcfHomeTestSuite : DXTestSuite
+@interface XcfHomeTestSuite : ARTestSuite
+
+- (void)testMenu;
+
+- (void)testHotDishes;
+
+- (void)testBuylist;
 
 @end

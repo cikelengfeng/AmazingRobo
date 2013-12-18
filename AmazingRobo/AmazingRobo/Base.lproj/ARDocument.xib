@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="DXDocument">
+        <customObject id="-2" userLabel="File's Owner" customClass="ARDocument">
             <connections>
                 <outlet property="fileCollectionView" destination="Gck-nC-s4i" id="JhF-SX-HEw"/>
                 <outlet property="fileNameView" destination="sA3-2I-r6y" id="Jlx-qL-3UY"/>
@@ -24,7 +24,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="794" height="699"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4ey-CX-odh" customClass="DXImageView">
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4ey-CX-odh" customClass="ARImageView">
                         <rect key="frame" x="58" y="88" width="314" height="562"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageAlignment="topLeft" imageScaling="proportionallyDown" id="Yoc-Y8-2PV"/>

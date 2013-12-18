@@ -6,9 +6,9 @@
 //  Copyright (c) 2013年 DeanXu. All rights reserved.
 //
 
-#import "DXImageView.h"
+#import "ARImageView.h"
 
-@interface DXImageView ()
+@interface ARImageView ()
 
 @property (assign,nonatomic) CGPoint startPoint;
 @property (assign,nonatomic) CGRect clipRect;
@@ -17,7 +17,7 @@
 
 @end
 
-@implementation DXImageView
+@implementation ARImageView
 
 - (id)initWithFrame:(NSRect)frame
 {

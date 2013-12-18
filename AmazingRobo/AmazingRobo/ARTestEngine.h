@@ -10,15 +10,15 @@
 #import "GCDAsyncSocket.h"
 #import "DXTouchCommand.h"
 
-@class DXTestEngine;
+@class ARTestEngine;
 @protocol DXTestEngineDelegate <NSObject>
 
-- (void)testEngine:(DXTestEngine *)engine hasNewScreenShot:(NSImage *)screenshot;
-- (void)testEngine:(DXTestEngine *)engine hasNewMatchResult:(CGRect)result min:(double)min max:(double)max matchMethod:(int)method;
+- (void)testEngine:(ARTestEngine *)engine hasNewScreenShot:(NSImage *)screenshot;
+- (void)testEngine:(ARTestEngine *)engine hasNewMatchResult:(CGRect)result min:(double)min max:(double)max matchMethod:(int)method;
 
 @end
 
-@interface DXTestEngine : NSObject<GCDAsyncSocketDelegate>
+@interface ARTestEngine : NSObject<GCDAsyncSocketDelegate>
 
 @property (weak,nonatomic) id<DXTestEngineDelegate> delegate;
 @property (strong,nonatomic,readonly) NSString *featurePath;

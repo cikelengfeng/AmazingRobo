@@ -12,6 +12,7 @@
 using namespace cv;
 
 #define kThreshold 0.85
+#define kInvalidRect CGRectMake(-1, -1, 0, 0)
 
 @implementation DXFeatureFinder
 
@@ -20,7 +21,7 @@ int match_method = CV_TM_CCOEFF_NORMED;
 + (CGRect)findFeature:(NSImage *)feature inImage:(NSImage *)image min:(double *)minVal max:(double *)maxVal method:(int *)method
 {
     if (!feature) {
-        return CGRectMake(-1, -1, 0, 0);
+        return kInvalidRect;
     }
     Mat resultMat = [self resultMatFromFeature:feature inImage:image];
     
@@ -33,7 +34,7 @@ int match_method = CV_TM_CCOEFF_NORMED;
         matchLoc = minLoc;
     }else{
         if (*maxVal < kThreshold) {
-            return CGRectMake(-1, -1, 0, 0);
+            return kInvalidRect;
         }
         matchLoc = maxLoc;
     }

@@ -12,27 +12,23 @@
 
 - (void)setup
 {
-    
 }
 
 - (void)teardown
 {
-    
 }
 
 - (void)testMenu
 {
-    
 }
 
 - (void)testHotDishes
 {
-    
 }
 
 - (void)testBuylist
 {
-    
 }
+
 
 @end

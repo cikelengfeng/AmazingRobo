@@ -6,23 +6,25 @@
 //  Copyright (c) 2013年 DeanXu. All rights reserved.
 //
 
-#import "DXDocument.h"
+#import "ARDocument.h"
 #import "DXTouchCommand.h"
 #import "Base64.h"
 #import "DXFeatureFinder.h"
-#import "DXTestEngine.h"
+#import "ARTestEngine.h"
+#import "ARTestRunner.h"
+#import "XcfHomeTestSuite.h"
 
-@interface DXDocument ()
+@interface ARDocument ()
 
 - (IBAction)clipButtonTapped:(id)sender;
 - (IBAction)findClippedButtonTapped:(id)sender;
 - (IBAction)fileNameInputComplete:(id)sender;
 - (IBAction)tapClippedButtonTapped:(id)sender;
 
-@property (strong,nonatomic) DXTestEngine *engine;
+@property (strong,nonatomic) ARTestEngine *engine;
 @property (strong,nonatomic) NSMutableArray *features;
 
-@property (weak) IBOutlet DXImageView *screenShot;
+@property (weak) IBOutlet ARImageView *screenShot;
 @property (weak) IBOutlet NSTextField *fileNameView;
 @property (weak) IBOutlet NSTextField *findResultView;
 @property (weak) IBOutlet NSTextField *matchingRateView;
@@ -30,14 +32,14 @@
 
 @end
 
-@implementation DXDocument
+@implementation ARDocument
 
 - (id)init
 {
     self = [super init];
     if (self) {
         // Add your subclass-specific initialization here.
-        _engine = [[DXTestEngine alloc]init];
+        _engine = [[ARTestEngine alloc]init];
     }
     return self;
 }
@@ -46,7 +48,7 @@
 {
     // Override returning the nib file name of the document
     // If you need to use a subclass of NSWindowController or if your document supports multiple NSWindowControllers, you should remove this method and override -makeWindowControllers instead.
-    return @"DXDocument";
+    return @"ARDocument";
 }
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController
@@ -56,6 +58,8 @@
     self.engine.delegate = self;
     [self.engine start];
     [self loadFeatures];
+    ARTestRunner *runner = [[ARTestRunner alloc]initWithTestEngine:self.engine testSuiteClasses:@[[XcfHomeTestSuite class]]];
+    [runner run];
 }
 
 + (BOOL)autosavesInPlace
@@ -110,12 +114,12 @@
 }
 
 #pragma mark - test engine delegate
--(void)testEngine:(DXTestEngine *)engine hasNewScreenShot:(NSImage *)screenshot
+-(void)testEngine:(ARTestEngine *)engine hasNewScreenShot:(NSImage *)screenshot
 {
     self.screenShot.image = screenshot;
 }
 
-- (void)testEngine:(DXTestEngine *)engine hasNewMatchResult:(CGRect)result min:(double)min max:(double)max matchMethod:(int)method
+- (void)testEngine:(ARTestEngine *)engine hasNewMatchResult:(CGRect)result min:(double)min max:(double)max matchMethod:(int)method
 {
     self.matchingRateView.stringValue = @(max).description;
 }

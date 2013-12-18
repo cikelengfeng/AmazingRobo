@@ -6,11 +6,11 @@
 //  Copyright (c) 2013年 DeanXu. All rights reserved.
 //
 
-#import "DXTestEngine.h"
+#import "ARTestEngine.h"
 #import "Base64.h"
 #import "DXFeatureFinder.h"
 
-@interface DXTestEngine ()
+@interface ARTestEngine ()
 
 @property (strong,nonatomic) GCDAsyncSocket *serverSocket;
 @property (strong,nonatomic) GCDAsyncSocket *connectSocket;
@@ -26,7 +26,7 @@
 
 @end
 
-@implementation DXTestEngine
+@implementation ARTestEngine
 
 - (id)init
 {

@@ -7,7 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ARTestEngine.h"
+#import "ARTestSuite.h"
 
 @interface ARTestRunner : NSObject
+
+- (instancetype)initWithTestEngine:(ARTestEngine *)engine testSuiteClasses:(NSArray *)suiteClasses;
+
+- (void)run;
+
+- (void)stop;
 
 @end
