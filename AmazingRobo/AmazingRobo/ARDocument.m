@@ -20,6 +20,7 @@
 - (IBAction)findClippedButtonTapped:(id)sender;
 - (IBAction)fileNameInputComplete:(id)sender;
 - (IBAction)tapClippedButtonTapped:(id)sender;
+- (IBAction)runTestButtonTapped:(id)sender;
 
 @property (strong,nonatomic) ARTestEngine *engine;
 @property (strong,nonatomic) NSMutableArray *features;
@@ -58,8 +59,6 @@
     self.engine.delegate = self;
     [self.engine start];
     [self loadFeatures];
-    ARTestRunner *runner = [[ARTestRunner alloc]initWithTestEngine:self.engine testSuiteClasses:@[[XcfHomeTestSuite class]]];
-    [runner run];
 }
 
 + (BOOL)autosavesInPlace
@@ -111,6 +110,11 @@
 - (IBAction)tapClippedButtonTapped:(id)sender {
     [self.engine tapFeature:self.fileNameView.stringValue.stringByDeletingPathExtension];
     [self findClippedButtonTapped:nil];
+}
+
+- (IBAction)runTestButtonTapped:(id)sender {
+    ARTestRunner *runner = [[ARTestRunner alloc]initWithTestEngine:self.engine];
+    [runner run];
 }
 
 #pragma mark - test engine delegate

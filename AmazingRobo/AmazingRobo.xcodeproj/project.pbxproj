@@ -15,6 +15,7 @@
 		42362D47184C5EE400649DDD /* DXFeatureFinder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 42362D46184C5EE400649DDD /* DXFeatureFinder.mm */; };
 		42362D4A184C633B00649DDD /* NSImage+OpenCV.mm in Sources */ = {isa = PBXBuildFile; fileRef = 42362D49184C633B00649DDD /* NSImage+OpenCV.mm */; };
 		423AA87F184DDB2700E3F9DC /* ARImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 423AA87E184DDB2700E3F9DC /* ARImageView.m */; };
+		42479F821862D34E0024380C /* ARLeftTestSuite.m in Sources */ = {isa = PBXBuildFile; fileRef = 42479F811862D34E0024380C /* ARLeftTestSuite.m */; };
 		425176281844816300C3D08D /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 425176251844816300C3D08D /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		42517630184481E000C3D08D /* DXTouchCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 4251762F184481E000C3D08D /* DXTouchCommand.m */; };
 		425BCFDE18619B5B00E00962 /* ARTestRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = 425BCFDD18619B5B00E00962 /* ARTestRunner.m */; };
@@ -78,6 +79,8 @@
 		42362D49184C633B00649DDD /* NSImage+OpenCV.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSImage+OpenCV.mm"; sourceTree = "<group>"; };
 		423AA87D184DDB2700E3F9DC /* ARImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARImageView.h; sourceTree = "<group>"; };
 		423AA87E184DDB2700E3F9DC /* ARImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARImageView.m; sourceTree = "<group>"; };
+		42479F801862D34E0024380C /* ARLeftTestSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARLeftTestSuite.h; sourceTree = "<group>"; };
+		42479F811862D34E0024380C /* ARLeftTestSuite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARLeftTestSuite.m; sourceTree = "<group>"; };
 		425176241844816300C3D08D /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		425176251844816300C3D08D /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		4251762E184481E000C3D08D /* DXTouchCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXTouchCommand.h; sourceTree = "<group>"; };
@@ -299,6 +302,8 @@
 				42A29B131855855100B835BE /* ARTestSuite.m */,
 				42A29B151855968300B835BE /* XcfHomeTestSuite.h */,
 				42A29B161855968300B835BE /* XcfHomeTestSuite.m */,
+				42479F801862D34E0024380C /* ARLeftTestSuite.h */,
+				42479F811862D34E0024380C /* ARLeftTestSuite.m */,
 			);
 			path = TestSuite;
 			sourceTree = "<group>";
@@ -532,6 +537,7 @@
 				42C0FDFF183B4A2F004094FD /* main.m in Sources */,
 				42A29B171855968300B835BE /* XcfHomeTestSuite.m in Sources */,
 				42517630184481E000C3D08D /* DXTouchCommand.m in Sources */,
+				42479F821862D34E0024380C /* ARLeftTestSuite.m in Sources */,
 				4230A76D185F0626006D865F /* ARCollectionItemView.m in Sources */,
 				423AA87F184DDB2700E3F9DC /* ARImageView.m in Sources */,
 				427CF29B185027E200B40A9A /* GCDAsyncUdpSocket.m in Sources */,

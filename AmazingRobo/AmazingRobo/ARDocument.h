@@ -11,7 +11,7 @@
 #import "ARTestEngine.h"
 #import "ARCollectionView.h"
 
-@interface ARDocument : NSDocument<DXTestEngineDelegate,NSCollectionViewDelegate,ARKeyboardEventResponder>
+@interface ARDocument : NSDocument<ARTestEngineDelegate,NSCollectionViewDelegate,ARKeyboardEventResponder>
 
 @property (strong,nonatomic,readonly) NSMutableArray *features;
 

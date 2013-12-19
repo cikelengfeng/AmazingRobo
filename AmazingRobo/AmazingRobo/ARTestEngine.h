@@ -11,21 +11,14 @@
 #import "DXTouchCommand.h"
 
 @class ARTestEngine;
-@protocol DXTestEngineDelegate <NSObject>
+@protocol ARTestEngineDelegate <NSObject>
 
 - (void)testEngine:(ARTestEngine *)engine hasNewScreenShot:(NSImage *)screenshot;
 - (void)testEngine:(ARTestEngine *)engine hasNewMatchResult:(CGRect)result min:(double)min max:(double)max matchMethod:(int)method;
 
 @end
 
-@interface ARTestEngine : NSObject<GCDAsyncSocketDelegate>
-
-@property (weak,nonatomic) id<DXTestEngineDelegate> delegate;
-@property (strong,nonatomic,readonly) NSString *featurePath;
-@property (strong,nonatomic,readonly) NSString *rootPath;
-@property (strong,nonatomic,readonly) NSString *featureExtension;
-
-- (void)start;
+@protocol ARAbstractTestEngine <NSObject>
 
 - (void)tapPoint:(CGPoint)point;
 - (void)tapFeature:(NSString *)featureName;
@@ -34,6 +27,17 @@
 - (CGRect)findFeature:(NSImage *)feature;
 - (CGRect)findFeatureByName:(NSString *)featureName;
 - (BOOL)hasFeature:(NSString *)featureName;
+
+@end
+
+@interface ARTestEngine : NSObject<GCDAsyncSocketDelegate,ARAbstractTestEngine>
+
+@property (weak,nonatomic) id<ARTestEngineDelegate> delegate;
+@property (strong,nonatomic,readonly) NSString *featurePath;
+@property (strong,nonatomic,readonly) NSString *rootPath;
+@property (strong,nonatomic,readonly) NSString *featureExtension;
+
+- (void)start;
 
 - (NSString *)featurePathWithName:(NSString *)name;
 

@@ -18,17 +18,24 @@
 {
 }
 
-- (void)testMenu
+- (void)testHome
 {
+    [self assert:[self hasFeature:@"menu"]];
+    [self tapFeature:@"menu"];
+    [self delay:3];
+    [self assert:[self hasFeature:@"xcf_textlogo"]];
+    [self tapPoint:CGPointMake(290, 30)];// go back
+    [self delay:3];
+    [self assert:[self hasFeature:@"hotdish"]];
+    [self tapFeature:@"hotdish"];
+    [self delay:3];
+    [self assert:[self hasFeature:@"hotdish_refresh"]];
+    [self assert:[self hasFeature:@"goback_button"]];
+    [self tapFeature:@"goback_button"];
+    [self delay:3];
+    [self assert:[self hasFeature:@"menu"]];
 }
 
-- (void)testHotDishes
-{
-}
-
-- (void)testBuylist
-{
-}
 
 
 @end

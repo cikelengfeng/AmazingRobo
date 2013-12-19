@@ -10,10 +10,7 @@
 
 @interface XcfHomeTestSuite : ARTestSuite
 
-- (void)testMenu;
+- (void)testHome;
 
-- (void)testHotDishes;
-
-- (void)testBuylist;
 
 @end

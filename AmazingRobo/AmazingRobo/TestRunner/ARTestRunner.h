@@ -12,10 +12,12 @@
 
 @interface ARTestRunner : NSObject
 
-- (instancetype)initWithTestEngine:(ARTestEngine *)engine testSuiteClasses:(NSArray *)suiteClasses;
+- (instancetype)initWithTestEngine:(ARTestEngine *)engine;
 
 - (void)run;
 
 - (void)stop;
+
++ (NSArray *)getAllTestClasses;
 
 @end
