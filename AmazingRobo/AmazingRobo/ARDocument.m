@@ -30,6 +30,7 @@
 @property (weak) IBOutlet NSTextField *findResultView;
 @property (weak) IBOutlet NSTextField *matchingRateView;
 @property (weak) IBOutlet NSCollectionView *fileCollectionView;
+@property (weak) IBOutlet NSTextField *logView;
 
 @end
 
@@ -113,7 +114,9 @@
 }
 
 - (IBAction)runTestButtonTapped:(id)sender {
+    self.logView.stringValue = @"";
     ARTestRunner *runner = [[ARTestRunner alloc]initWithTestEngine:self.engine];
+    runner.delegate = self;
     [runner run];
 }
 
@@ -126,6 +129,41 @@
 - (void)testEngine:(ARTestEngine *)engine hasNewMatchResult:(CGRect)result min:(double)min max:(double)max matchMethod:(int)method
 {
     self.matchingRateView.stringValue = @(max).description;
+}
+
+#pragma mark - test runner delegate
+- (void)testRunnerStartRunning:(ARTestRunner *)runner
+{
+    self.logView.stringValue = [NSString stringWithFormat:@"%@\n%@",self.logView.stringValue,@"start !!!!!!!!!!"];
+}
+
+- (void)testRunnerStopRunning:(ARTestRunner *)runner
+{
+    self.logView.stringValue = [NSString stringWithFormat:@"%@\n%@",self.logView.stringValue,@"stop !!!!!!!!!!"];
+}
+
+- (void)testRunner:(ARTestRunner *)runner startTestSuite:(Class)testSuiteClass
+{
+    self.logView.stringValue = [NSString stringWithFormat:@"%@\n---- start test %@",self.logView.stringValue,NSStringFromClass(testSuiteClass)];
+}
+
+- (void)testRunner:(ARTestRunner *)runner finishTestSuite:(Class)testSuiteClass
+{
+    self.logView.stringValue = [NSString stringWithFormat:@"%@\n---- finish test %@",self.logView.stringValue,NSStringFromClass(testSuiteClass)];
+}
+
+- (void)testRunner:(ARTestRunner *)runner startTestMethod:(SEL)selector inTestSuite:(Class)testSuiteClass
+{
+    self.logView.stringValue = [NSString stringWithFormat:@"%@\n-------- start test method %@",self.logView.stringValue,NSStringFromSelector(selector)];
+}
+
+- (void)testRunner:(ARTestRunner *)runner finishTestMethod:(SEL)selector exception:(NSException *)exc inTestSuite:(Class)testSuiteClass
+{
+    if (exc == nil) {
+        self.logView.stringValue = [NSString stringWithFormat:@"%@\n-------- %@ SUCCESSED",self.logView.stringValue,NSStringFromSelector(selector)];
+    }else {
+        self.logView.stringValue = [NSString stringWithFormat:@"%@\n-------- %@ FAILED",self.logView.stringValue,NSStringFromSelector(selector)];
+    }
 }
 
 #pragma mark -  file operations

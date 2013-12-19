@@ -10,8 +10,9 @@
 #import "ARImageView.h"
 #import "ARTestEngine.h"
 #import "ARCollectionView.h"
+#import "ARTestRunner.h"
 
-@interface ARDocument : NSDocument<ARTestEngineDelegate,NSCollectionViewDelegate,ARKeyboardEventResponder>
+@interface ARDocument : NSDocument<ARTestEngineDelegate,NSCollectionViewDelegate,ARKeyboardEventResponder,ARTestRunnerDelegate>
 
 @property (strong,nonatomic,readonly) NSMutableArray *features;
 

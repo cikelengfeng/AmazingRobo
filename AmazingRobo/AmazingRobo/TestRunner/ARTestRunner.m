@@ -32,8 +32,15 @@
 
 - (void)run
 {
+    __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0l), ^{
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [weakSelf.delegate testRunnerStartRunning:weakSelf];
+        });
         for (Class suiteClass in self.suiteClasses) {
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [weakSelf.delegate testRunner:weakSelf startTestSuite:suiteClass];
+            });
             ARTestSuite *suite = [[suiteClass alloc]initWithTestEngine:self.engine];
             unsigned int methodCount ;
             Method *allMethods = class_copyMethodList(suiteClass, &methodCount);
@@ -42,21 +49,34 @@
                 Method *method = &allMethods[i];
                 SEL selector = method_getName(*method);
                 NSString *selString = NSStringFromSelector(selector);
+                NSException *exc = nil;
                 if ([selString hasPrefix:@"test"]) {
                     @try {
+                        dispatch_sync(dispatch_get_main_queue(), ^{
+                            [weakSelf.delegate testRunner:weakSelf startTestMethod:selector inTestSuite:suiteClass];
+                        });
                         [suite performSelector:selector onThread:[NSThread currentThread] withObject:Nil waitUntilDone:YES];
                         NSLog(@"method : %@ of %s is successed",selString,class_getName(suiteClass));
                     }
                     @catch (NSException *exception) {
                         NSLog(@"method : %@ of %s is failed",selString,class_getName(suiteClass));
+                        exc = exception;
                     }
                     @finally {
-                        
+                        dispatch_sync(dispatch_get_main_queue(), ^{
+                            [weakSelf.delegate testRunner:weakSelf finishTestMethod:selector exception:exc inTestSuite:suiteClass];
+                        });
                     }
                 }
             }
             [suite teardown];
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [weakSelf.delegate testRunner:weakSelf finishTestSuite:suiteClass];
+            });
         }
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [weakSelf.delegate testRunnerStopRunning:weakSelf];
+        });
     });
 }
 
