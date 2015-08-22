@@ -31,6 +31,7 @@
 @property (weak) IBOutlet NSTextField *matchingRateView;
 @property (weak) IBOutlet NSCollectionView *fileCollectionView;
 @property (weak) IBOutlet NSTextField *logView;
+@property (weak) IBOutlet NSButton *runTestButton;
 
 @end
 
@@ -98,10 +99,7 @@
 }
 
 - (IBAction)findClippedButtonTapped:(id)sender {
-    CGRect result = [self.engine findFeatureByName:self.fileNameView.stringValue.stringByDeletingPathExtension];
-    self.findResultView.stringValue = NSStringFromPoint(result.origin);
-    CGRect drawMaskRect = CGRectMake(result.origin.x, self.screenShot.bounds.size.height - result.origin.y - result.size.height, result.size.width, result.size.height);
-    [self.screenShot setRectangleMask:drawMaskRect];
+    [self.engine findFeatureByName:self.fileNameView.stringValue.stringByDeletingPathExtension];
 }
 
 - (IBAction)fileNameInputComplete:(id)sender {
@@ -128,6 +126,9 @@
 
 - (void)testEngine:(ARTestEngine *)engine hasNewMatchResult:(CGRect)result min:(double)min max:(double)max matchMethod:(int)method
 {
+    self.findResultView.stringValue = NSStringFromPoint(result.origin);
+    CGRect drawMaskRect = CGRectMake(result.origin.x, self.screenShot.bounds.size.height - result.origin.y - result.size.height, result.size.width, result.size.height);
+    [self.screenShot setRectangleMask:drawMaskRect];
     self.matchingRateView.stringValue = @(max).description;
 }
 
@@ -135,16 +136,18 @@
 - (void)testRunnerStartRunning:(ARTestRunner *)runner
 {
     self.logView.stringValue = [NSString stringWithFormat:@"%@\n%@",self.logView.stringValue,@"start !!!!!!!!!!"];
+    [self.runTestButton setEnabled:NO];
 }
 
 - (void)testRunnerStopRunning:(ARTestRunner *)runner
 {
     self.logView.stringValue = [NSString stringWithFormat:@"%@\n%@",self.logView.stringValue,@"stop !!!!!!!!!!"];
+    [self.runTestButton setEnabled:YES];
 }
 
 - (void)testRunner:(ARTestRunner *)runner startTestSuite:(Class)testSuiteClass
 {
-    self.logView.stringValue = [NSString stringWithFormat:@"%@\n---- start test %@",self.logView.stringValue,NSStringFromClass(testSuiteClass)];
+    self.logView.stringValue = [NSString stringWithFormat:@"%@\n\n---- start test %@",self.logView.stringValue,NSStringFromClass(testSuiteClass)];
 }
 
 - (void)testRunner:(ARTestRunner *)runner finishTestSuite:(Class)testSuiteClass

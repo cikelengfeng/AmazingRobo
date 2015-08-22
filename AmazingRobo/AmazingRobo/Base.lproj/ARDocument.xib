@@ -11,6 +11,7 @@
                 <outlet property="findResultView" destination="1BQ-De-hEj" id="Zw9-LW-sEB"/>
                 <outlet property="logView" destination="5RW-WC-Zxl" id="EUC-SK-HWM"/>
                 <outlet property="matchingRateView" destination="Oew-M3-XwQ" id="UfH-QO-mRz"/>
+                <outlet property="runTestButton" destination="WDb-lC-iQV" id="GqK-7d-SYw"/>
                 <outlet property="screenShot" destination="4ey-CX-odh" id="iAB-8M-kgD"/>
                 <outlet property="window" destination="5" id="18"/>
             </connections>

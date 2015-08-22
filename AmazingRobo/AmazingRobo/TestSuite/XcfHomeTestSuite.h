@@ -10,7 +10,5 @@
 
 @interface XcfHomeTestSuite : ARTestSuite
 
-- (void)testHome;
-
 
 @end

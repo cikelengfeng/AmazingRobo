@@ -10,8 +10,6 @@
 		4230A76A185EF00C006D865F /* ARCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4230A769185EF00C006D865F /* ARCollectionView.m */; };
 		4230A76D185F0626006D865F /* ARCollectionItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4230A76C185F0626006D865F /* ARCollectionItemView.m */; };
 		4230A770185F06B6006D865F /* ARCollectionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4230A76F185F06B6006D865F /* ARCollectionItem.m */; };
-		42362D29184C55AE00649DDD /* libopencv_imgproc.2.4.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 42362D28184C55AE00649DDD /* libopencv_imgproc.2.4.7.dylib */; };
-		42362D3A184C575100649DDD /* libopencv_core.2.4.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 42362D2C184C575100649DDD /* libopencv_core.2.4.7.dylib */; };
 		42362D47184C5EE400649DDD /* DXFeatureFinder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 42362D46184C5EE400649DDD /* DXFeatureFinder.mm */; };
 		42362D4A184C633B00649DDD /* NSImage+OpenCV.mm in Sources */ = {isa = PBXBuildFile; fileRef = 42362D49184C633B00649DDD /* NSImage+OpenCV.mm */; };
 		423AA87F184DDB2700E3F9DC /* ARImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 423AA87E184DDB2700E3F9DC /* ARImageView.m */; };
@@ -41,6 +39,8 @@
 		42A29B141855855100B835BE /* ARTestSuite.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A29B131855855100B835BE /* ARTestSuite.m */; };
 		42A29B171855968300B835BE /* XcfHomeTestSuite.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A29B161855968300B835BE /* XcfHomeTestSuite.m */; };
 		42A29B1A18559B4300B835BE /* ARTestEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A29B1918559B4300B835BE /* ARTestEngine.m */; };
+		42AB35821B88E08C00127DA7 /* libopencv_core.2.4.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 42AB357E1B88D41300127DA7 /* libopencv_core.2.4.9.dylib */; };
+		42AB35831B88E08C00127DA7 /* libopencv_imgproc.2.4.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 42AB357F1B88D41300127DA7 /* libopencv_imgproc.2.4.9.dylib */; };
 		42C0FDF3183B4A2F004094FD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42C0FDF2183B4A2F004094FD /* Cocoa.framework */; };
 		42C0FDFD183B4A2F004094FD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 42C0FDFB183B4A2F004094FD /* InfoPlist.strings */; };
 		42C0FDFF183B4A2F004094FD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C0FDFE183B4A2F004094FD /* main.m */; };
@@ -125,6 +125,8 @@
 		42A29B161855968300B835BE /* XcfHomeTestSuite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XcfHomeTestSuite.m; sourceTree = "<group>"; };
 		42A29B1818559B4300B835BE /* ARTestEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARTestEngine.h; sourceTree = "<group>"; };
 		42A29B1918559B4300B835BE /* ARTestEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARTestEngine.m; sourceTree = "<group>"; };
+		42AB357E1B88D41300127DA7 /* libopencv_core.2.4.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_core.2.4.9.dylib; path = ../../../../../usr/local/Cellar/opencv/2.4.9/lib/libopencv_core.2.4.9.dylib; sourceTree = "<group>"; };
+		42AB357F1B88D41300127DA7 /* libopencv_imgproc.2.4.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgproc.2.4.9.dylib; path = ../../../../../usr/local/Cellar/opencv/2.4.9/lib/libopencv_imgproc.2.4.9.dylib; sourceTree = "<group>"; };
 		42C0FDEF183B4A2F004094FD /* AmazingRobo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AmazingRobo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42C0FDF2183B4A2F004094FD /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		42C0FDF5183B4A2F004094FD /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -152,9 +154,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42AB35821B88E08C00127DA7 /* libopencv_core.2.4.9.dylib in Frameworks */,
+				42AB35831B88E08C00127DA7 /* libopencv_imgproc.2.4.9.dylib in Frameworks */,
 				427CF34A185033A300B40A9A /* Security.framework in Frameworks */,
-				42362D3A184C575100649DDD /* libopencv_core.2.4.7.dylib in Frameworks */,
-				42362D29184C55AE00649DDD /* libopencv_imgproc.2.4.7.dylib in Frameworks */,
 				42C0FDF3183B4A2F004094FD /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -330,6 +332,8 @@
 		42C0FDF1183B4A2F004094FD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				42AB357E1B88D41300127DA7 /* libopencv_core.2.4.9.dylib */,
+				42AB357F1B88D41300127DA7 /* libopencv_imgproc.2.4.9.dylib */,
 				427CF349185033A300B40A9A /* Security.framework */,
 				42362D2C184C575100649DDD /* libopencv_core.2.4.7.dylib */,
 				42362D28184C55AE00649DDD /* libopencv_imgproc.2.4.7.dylib */,
@@ -688,14 +692,11 @@
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/local/include,
+					/usr/local/include/opencv,
 				);
 				INFOPLIST_FILE = "AmazingRobo/AmazingRobo-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					/usr/local/lib,
-					"/Users/xudong/Downloads/opencv-2.4.7/release/lib",
-				);
+				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/opencv/2.4.9/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -714,14 +715,11 @@
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/local/include,
+					/usr/local/include/opencv,
 				);
 				INFOPLIST_FILE = "AmazingRobo/AmazingRobo-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					/usr/local/lib,
-					"/Users/xudong/Downloads/opencv-2.4.7/release/lib",
-				);
+				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/opencv/2.4.9/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";

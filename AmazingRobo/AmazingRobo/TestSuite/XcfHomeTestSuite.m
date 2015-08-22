@@ -18,7 +18,17 @@
 {
 }
 
-- (void)testHome
+- (void)testSearch
+{
+    [self assert:[self hasFeature:@"placeholder"]];
+    [self tapFeature:@"placeholder"];
+    [self delay:3];
+    [self assert:[self hasFeature:@"cancel_search"]];
+    [self tapFeature:@"cancel_search"];
+    [self delay:3];
+}
+
+- (void)testMenu
 {
     [self assert:[self hasFeature:@"menu"]];
     [self tapFeature:@"menu"];
@@ -26,6 +36,10 @@
     [self assert:[self hasFeature:@"xcf_textlogo"]];
     [self tapPoint:CGPointMake(290, 30)];// go back
     [self delay:3];
+}
+
+- (void)testHotDish
+{
     [self assert:[self hasFeature:@"hotdish"]];
     [self tapFeature:@"hotdish"];
     [self delay:3];
@@ -34,8 +48,12 @@
     [self tapFeature:@"goback_button"];
     [self delay:3];
     [self assert:[self hasFeature:@"menu"]];
+    [self assert:[self hasFeature:@"dailyhotspot"]];
 }
 
-
+- (void)testError
+{
+    [self assert:NO];
+}
 
 @end
